@@ -6,18 +6,17 @@
  * @flow strict-local
  */
 
+import 'react-native-gesture-handler';
 import React from 'react';
-import HomeScreen from "./src/screens/home/HomeScreen";
-
+import { NavigationContainer } from '@react-navigation/native';
+import { RootStack } from './src/navigation';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <HomeScreen />
-    </>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 };
-
-
 
 export default App;
