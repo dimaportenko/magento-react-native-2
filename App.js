@@ -9,13 +9,24 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { RootStack } from './src/navigation';
+import { magentoConfig } from './magento.config';
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: `${magentoConfig.baseUrl}graphql/`,
+  }),
+});
 
 const App: () => React$Node = () => {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ApolloProvider>
   );
 };
 
