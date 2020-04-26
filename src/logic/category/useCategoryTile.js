@@ -1,6 +1,23 @@
+/**
+ * @flow
+ */
+import type { Category } from '../types/magento';
+
+type Props = {
+  item: Category
+};
+
+type CategoryTileResponse = {
+  image: {
+    url: string,
+    type: string,
+  },
+  item: Category,
+};
+
 import { useMemo } from 'react';
 
-export const useCategoryTileImage = props => {
+export const useCategoryTileImage = (props: Props): CategoryTileResponse => {
   const { item } = props;
   const { image, productImagePreview } = item;
 
@@ -13,7 +30,7 @@ export const useCategoryTileImage = props => {
       };
     } else if (previewProduct) {
       return {
-        url: previewProduct.small_image,
+        url: previewProduct.small_image?.url || '',
         type: 'image-product',
       };
     } else {
