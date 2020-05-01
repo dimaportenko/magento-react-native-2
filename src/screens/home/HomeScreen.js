@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, ActivityIndicator } from 'react-native';
-import { Center } from 'react-native-markup-kit';
+import { Center, Row, Spacer } from 'react-native-markup-kit';
 import { useCategoryList } from '../../logic/category/useCategoryList';
 import { magentoConfig } from '../../../magento.config';
 import { GET_CATEGORY_LIST } from '../../queries/getCategoryList';
@@ -30,10 +30,13 @@ export default () => {
   }
 
   return (
-    <Center>
+    <Row>
       {childCategories?.map(category => (
-        <CategoryTile category={category} />
+        <Row>
+          <Spacer size={30}/>
+          <CategoryTile  category={category} />
+        </Row>
       ))}
-    </Center>
+    </Row>
   );
 };

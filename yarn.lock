@@ -5113,10 +5113,10 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-markup-kit@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-markup-kit/-/react-native-markup-kit-0.0.4.tgz#860d259decdd4f2fcf995cf4dbb52077b8351dd4"
-  integrity sha512-DvIqvYcmWWTmkC4LAx3vwQSz9Jjq4OUc8UG6FCEI3jMEGny3Yng8VaZMapamZExdSidtE5F1a5iAdT2j/XYV0Q==
+react-native-markup-kit@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-markup-kit/-/react-native-markup-kit-0.1.1.tgz#f41cf345b08ff4b2259228f0920cbbd5ef271c92"
+  integrity sha512-jPaNomGwZ0/dq4KqN2gCYTIP/6YIG1HyHRtKQR79ueJNriRb4RdZsa5eAYt2aa+P3XVsRNB89RjNsqpCapjfFQ==
 
 react-native-reanimated@^1.8.0:
   version "1.8.0"
