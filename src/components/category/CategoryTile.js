@@ -3,8 +3,9 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
+import stc from 'string-to-color';
 import type { Category } from '../../logic/types/magento';
 import Sizes from '../../theme/dimens';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
@@ -14,11 +15,16 @@ type Props = {
 };
 
 export default (props: Props) => {
+  const [backgroundColor, setBackgroundColor] = useState('#fff');
   const { category } = props;
   const { item, image } = useCategoryTileImage({ item: category });
 
+  useEffect(() => {
+    setBackgroundColor(stc(category.name));
+  }, [category.name])
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       {
         image.url.length > 0 &&
         <Image source={{ uri: image.url }} style={styles.image} resizeMode="contain" />
