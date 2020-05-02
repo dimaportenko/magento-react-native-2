@@ -1,10 +1,14 @@
+/** @flow */
 import React from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
-import { View, Text } from 'react-native-ui-lib';
+import { FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, AnimatableManager } from 'react-native-ui-lib';
+import * as Animatable from 'react-native-animatable';
 import { useCategoryList } from '../../logic/category/useCategoryList';
 import { magentoConfig } from '../../../magento.config';
 import { GET_CATEGORY_LIST } from '../../queries/getCategoryList';
 import CategoryTile from '../../components/category/CategoryTile';
+
+import type { Category } from '../../logic/types/magento';
 
 
 export default () => {
@@ -29,15 +33,27 @@ export default () => {
     );
   }
 
+  const renderItem = (item: Category, index: number) => {
+    const animationProps = AnimatableManager.getEntranceByIndex(index);
+    return (
+      <Animatable.View key={index} {...animationProps}>
+        <View marginV-7>
+          <CategoryTile category={item} right={!!(index % 2)} />
+        </View>
+      </Animatable.View>
+    );
+  };
+
+  const keyExtractor = (item: Category, index: number): string => (`${item.name}${index}`);
+
   return (
-    <View flex marginH-10>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {childCategories?.map((category, index) => (
-          <View key={`${category.name}${index}`} marginV-7>
-            <CategoryTile category={category} right={!!(index % 2)} />
-          </View>
-        ))}
-      </ScrollView>
+    <View flex>
+      <FlatList
+        style={{ paddingHorizontal: 15, paddingVertical: 8 }}
+        data={childCategories}
+        renderItem={({ item, index }) => renderItem(item, index)}
+        keyExtractor={keyExtractor}
+      />
     </View>
   );
 };

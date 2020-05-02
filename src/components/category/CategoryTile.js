@@ -63,12 +63,15 @@ export default (props: Props) => {
 
   return (
     <Card
-      row // control the children flow direction
+      row
       borderRadius={20}
       height={80}
       containerStyle={{ backgroundColor }}
-      // onPress={...}
+      onPress={() => {}}
       enableShadow
+      useNative
+      activeOpacity={1}
+      activeScale={1.04}
     >
       {render()}
     </Card>
