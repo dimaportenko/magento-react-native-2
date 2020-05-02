@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, ActivityIndicator } from 'react-native';
-import { Center, Row, Spacer } from 'react-native-markup-kit';
+import { ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native-ui-lib';
 import { useCategoryList } from '../../logic/category/useCategoryList';
 import { magentoConfig } from '../../../magento.config';
 import { GET_CATEGORY_LIST } from '../../queries/getCategoryList';
@@ -15,28 +15,29 @@ export default () => {
 
   if (loading) {
     return (
-      <Center>
+      <View flex center>
         <ActivityIndicator size="large" />
-      </Center>
+      </View>
     );
   }
 
   if (error) {
     return (
-      <Center>
+      <View flex center>
         <Text>{error.message}</Text>
-      </Center>
+      </View>
     );
   }
 
   return (
-    <Row>
-      {childCategories?.map(category => (
-        <Row>
-          <Spacer size={30}/>
-          <CategoryTile  category={category} />
-        </Row>
-      ))}
-    </Row>
+    <View flex marginH-10>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {childCategories?.map((category, index) => (
+          <View key={`${category.name}${index}`} marginV-7>
+            <CategoryTile category={category} right={!!(index % 2)} />
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
