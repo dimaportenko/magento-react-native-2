@@ -4,17 +4,20 @@ import { FlatList, ActivityIndicator } from 'react-native';
 import { View, Text, AnimatableManager } from 'react-native-ui-lib';
 import * as Animatable from 'react-native-animatable';
 import { useCategoryList } from '../../logic/category/useCategoryList';
-import { magentoConfig } from '../../../magento.config';
 import { GET_CATEGORY_LIST } from '../../queries/getCategoryList';
-import CategoryTile from '../../components/category/CategoryTile';
+import { CategoryItem } from './CategoryItem';
 
 import type { Category } from '../../logic/types/magento';
 
+type Props = {
+  categoryId: number,
+  onPress(categoryId: number, title: string): void,
+};
 
-export default () => {
+export const Categories = (props: Props) => {
   const { childCategories, error, loading } = useCategoryList({
     query: GET_CATEGORY_LIST,
-    id: magentoConfig.rootCategoryId,
+    id: props.categoryId,
   });
 
   if (loading) {
@@ -38,7 +41,7 @@ export default () => {
     return (
       <Animatable.View key={index} {...animationProps}>
         <View marginV-7>
-          <CategoryTile category={item} right={!!(index % 2)} />
+          <CategoryItem category={item} right={!!(index % 2)} onPress={props.onPress} />
         </View>
       </Animatable.View>
     );

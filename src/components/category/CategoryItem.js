@@ -4,22 +4,40 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { Image, Text, View, Card } from 'react-native-ui-lib';
+import { Image, StyleSheet } from 'react-native';
+import { Text, View, Card, Colors } from 'react-native-ui-lib';
 import stc from 'string-to-color';
 import type { Category } from '../../logic/types/magento';
-import Sizes from '../../theme/dimens';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
 
 type Props = {
   category: Category,
   right?: boolean,
+  onPress(categoryId: number, title: string): void,
 };
 
-export default (props: Props) => {
+const BORDER_RADIUS = 15;
+const IMAGE_WIDTH = 90;
+
+export const CategoryItem = (props: Props) => {
   const [backgroundColor, setBackgroundColor] = useState('#fff');
-  const { category, right } = props;
+  const [imageWrapStyle, setImageWrapStyle] = useState({});
+  const { category, right, onPress } = props;
   const { item, image } = useCategoryTileImage({ item: category });
+
+  useEffect(() => {
+    if (right) {
+      setImageWrapStyle({
+        borderTopRightRadius: BORDER_RADIUS,
+        borderBottomRightRadius: BORDER_RADIUS,
+      });
+    } else {
+      setImageWrapStyle({
+        borderTopLeftRadius: BORDER_RADIUS,
+        borderBottomLeftRadius: BORDER_RADIUS,
+      });
+    }
+  }, [right]);
 
   useEffect(() => {
     setBackgroundColor(stc(category.name));
@@ -28,19 +46,22 @@ export default (props: Props) => {
   const renderImage = () => {
     if (image.url.length > 0) {
       return (
-        <Card.Image
-          imageSource={{ uri: image.url }}
-          height={'100%'}
-          width={100}
-          position={right ? 'right' : 'left'}
-        />
+        <View style={[styles.imageWrap, imageWrapStyle]}>
+          <Image
+            source={{ uri: image.url }}
+            height={'100%'}
+            width={IMAGE_WIDTH}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </View>
       );
     }
   };
 
   const renderContent = () => (
     <View flex center>
-      <Text>{category.name}</Text>
+      <Text categoryItemTitle>{category.name}</Text>
     </View>
   );
 
@@ -59,15 +80,15 @@ export default (props: Props) => {
         {renderContent()}
       </React.Fragment>
     );
-  }
+  };
 
   return (
     <Card
       row
-      borderRadius={20}
+      borderRadius={BORDER_RADIUS}
       height={80}
       containerStyle={{ backgroundColor }}
-      onPress={() => {}}
+      onPress={() => { onPress(category.id, category.name); }}
       enableShadow
       useNative
       activeOpacity={1}
@@ -79,4 +100,11 @@ export default (props: Props) => {
 };
 
 const styles = StyleSheet.create({
+  imageWrap: {
+    backgroundColor: Colors.white,
+  },
+  image: {
+    width: IMAGE_WIDTH,
+    height: '100%',
+  },
 });

@@ -12,6 +12,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { RootStack } from './src/navigation';
 import { magentoConfig } from './magento.config';
+import { themeInit } from './src/theme';
+
+themeInit();
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
