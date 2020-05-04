@@ -1,18 +1,14 @@
+// @flow
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import type { Category } from '../types/magento';
 
-/**
- * @flow
- *
- * Returns props necessary to render a CategoryList component.
- *
- * @param {object} props
- * @param {object} props.query - category data
- * @param {string} props.id - category id
- * @return {{ childCategories: array, error: object }}
- */
-export const useCategoryList = props => {
+type Props = {
+  id: number,
+  query: string,
+}
+
+export const useCategoryList = (props: Props) => {
   const [categories, setCategories] = useState([]);
   const { query, id } = props;
 
@@ -31,7 +27,7 @@ export const useCategoryList = props => {
       );
       setCategories(filtered);
     }
-  }, [data])
+  }, [data]);
 
   return {
     childCategories: categories,
