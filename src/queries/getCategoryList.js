@@ -1,16 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const GET_CATEGORY_LIST = gql`
-    query categoryList($id: Int!) {
-        category(id: $id) {
+    query categoryList($id: String) {
+        categoryList(filters: { ids: { eq: $id } }) {
             id
             children {
                 id
                 name
-                url_key
-                url_path
                 children_count
-                path
+                product_count
                 image
                 productImagePreview: products(pageSize: 1) {
                     items {

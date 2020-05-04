@@ -22,7 +22,7 @@ export const useCategoryList = props => {
 
   return {
     childCategories:
-      (data && data.category && data.category.children) || null,
+      (data?.categoryList?.[0]?.children) || null,
     error,
     loading,
   };
