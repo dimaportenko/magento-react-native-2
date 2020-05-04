@@ -1,0 +1,1 @@
+export const CATEGORIES_DATA = 'CATEGORIES_DATA';
