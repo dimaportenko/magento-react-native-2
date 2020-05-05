@@ -1,4 +1,4 @@
-/** @flow strict-local */
+/** @flow */
 import React, { useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { View } from 'react-native-ui-lib';

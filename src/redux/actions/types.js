@@ -1,1 +1,2 @@
-export const CATEGORIES_DATA = 'CATEGORIES_DATA';
+/** @flow */
+export const CATEGORIES_DATA: string = 'CATEGORIES_DATA';
