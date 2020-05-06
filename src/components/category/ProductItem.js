@@ -83,9 +83,8 @@ export const ProductItem = (props: Props) => {
       activeOpacity={1}
     >
       {renderImage()}
-
       <View margin-10 >
-        <Text center productItemTitle>{product.name}</Text>
+        <Text center productItemTitle>{product.name?.replace(/\&(.*?);/gm, '')}</Text>
         <Text center productItemTitle>
           {`${product.price.regularPrice.amount.currency} ${product.price.regularPrice.amount.value}`}
         </Text>

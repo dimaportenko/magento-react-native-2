@@ -1,9 +1,10 @@
 /** @flow */
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
-import { View, Text, Spacings } from 'react-native-ui-lib';
-import { magentoConfig } from '../../../magento.config';
+import { View, Text, Spacings, AnimatableManager } from 'react-native-ui-lib';
 import { useRoute } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
+import { magentoConfig } from '../../../magento.config';
 import { useCategory } from '../../logic/category/useCategory';
 import { GET_CATEGORY } from '../../queries/getCategory';
 import type { Product } from '../../logic/types/magento';
@@ -43,8 +44,11 @@ export const CategoryScreen = () => {
   }
 
   const renderItem = (item: Product, index: number): React$Node => {
+    const animationProps = AnimatableManager.getEntranceByIndex(index);
     return (
-      <ProductItem product={item} />
+      <Animatable.View key={index} {...animationProps}>
+        <ProductItem product={item} />
+      </Animatable.View>
     );
   };
 
@@ -65,9 +69,6 @@ export const CategoryScreen = () => {
 
 const styles = StyleSheet.create({
   list: {
-    // paddingHorizontal: Spacings.s4,
     paddingVertical: Spacings.s2,
-    // justifyContent: 'space-between',
-  // alignItems: 'stretch',
   },
 });

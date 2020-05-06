@@ -91,7 +91,7 @@ export const CategoryItem = (props: Props) => {
       enableShadow
       useNative
       activeOpacity={1}
-      activeScale={1.04}
+      activeScale={0.98}
     >
       {render()}
     </Card>
