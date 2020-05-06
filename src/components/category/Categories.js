@@ -11,7 +11,7 @@ import type { Category } from '../../logic/types/magento';
 
 type Props = {
   categoryId: number,
-  onPress(categoryId: number, title: string): void,
+  onPress(category: Category): void,
 };
 
 export const Categories = (props: Props) => {

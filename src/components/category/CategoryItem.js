@@ -12,7 +12,7 @@ import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
 type Props = {
   category: Category,
   right?: boolean,
-  onPress(categoryId: number, title: string): void,
+  onPress(category: Category): void,
 };
 
 const BORDER_RADIUS = 15;
@@ -87,7 +87,7 @@ export const CategoryItem = (props: Props) => {
       borderRadius={BORDER_RADIUS}
       height={80}
       containerStyle={{ backgroundColor }}
-      onPress={() => { onPress(category.id, category.name); }}
+      onPress={() => { onPress(category); }}
       enableShadow
       useNative
       activeOpacity={1}

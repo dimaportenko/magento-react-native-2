@@ -5,6 +5,7 @@ import { View } from 'react-native-ui-lib';
 import { magentoConfig } from '../../../magento.config';
 import { Categories } from '../../components/category/Categories';
 import * as routes from '../../navigation/types';
+import type { Category } from '../../logic/types/magento';
 
 
 export const CategoriesScreen = () => {
@@ -12,8 +13,15 @@ export const CategoriesScreen = () => {
   const navigation = useNavigation();
   const [categoryId] = useState(route?.params?.categoryId || magentoConfig.rootCategoryId);
 
-  const onCategoryPress = (catId: number, title: string) => {
-    navigation.push(routes.CATEGORIES_SCREEN, { categoryId: catId, title });
+  const onCategoryPress = (category: Category) => {
+    const route: string = category.children_count > 0
+      ? routes.CATEGORIES_SCREEN
+      : routes.CATEGORY_SCREEN;
+
+    navigation.push(route, {
+      categoryId: category.id,
+      title: category.name,
+    });
   };
 
   return (
