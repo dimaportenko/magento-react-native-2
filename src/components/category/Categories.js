@@ -1,7 +1,7 @@
 /** @flow */
 import React from 'react';
-import { FlatList, ActivityIndicator } from 'react-native';
-import { View, Text, AnimatableManager } from 'react-native-ui-lib';
+import { FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, AnimatableManager, Spacings } from 'react-native-ui-lib';
 import * as Animatable from 'react-native-animatable';
 import { useCategoryList } from '../../logic/category/useCategoryList';
 import { GET_CATEGORY_LIST } from '../../queries/getCategoryList';
@@ -52,7 +52,7 @@ export const Categories = (props: Props) => {
   return (
     <View flex>
       <FlatList
-        style={{ paddingHorizontal: 15, paddingVertical: 8 }}
+        style={styles.list}
         data={childCategories}
         renderItem={({ item, index }) => renderItem(item, index)}
         keyExtractor={keyExtractor}
@@ -60,3 +60,10 @@ export const Categories = (props: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  list: {
+    paddingHorizontal: Spacings.s4,
+    paddingVertical: Spacings.s2,
+  },
+});

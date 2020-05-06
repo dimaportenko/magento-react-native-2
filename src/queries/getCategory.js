@@ -1,3 +1,4 @@
+/** @noflow */
 import { gql } from '@apollo/client';
 
 export const GET_CATEGORY = gql`
@@ -5,7 +6,6 @@ export const GET_CATEGORY = gql`
         $id: Int!
         $pageSize: Int!
         $currentPage: Int!
-        $onServer: Boolean!
         $filters: ProductAttributeFilterInput!
         $sort: ProductAttributeSortInput
     ) {
@@ -14,9 +14,6 @@ export const GET_CATEGORY = gql`
             description
             name
             product_count
-            meta_title @include(if: $onServer)
-            meta_keywords @include(if: $onServer)
-            meta_description
         }
         products(
             pageSize: $pageSize
@@ -38,9 +35,6 @@ export const GET_CATEGORY = gql`
                     disabled
                     file
                 }
-                meta_title @include(if: $onServer)
-                meta_keyword @include(if: $onServer)
-                meta_description
                 name
                 price {
                     regularPrice {

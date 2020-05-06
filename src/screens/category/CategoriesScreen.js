@@ -26,7 +26,7 @@ export const CategoriesScreen = () => {
 
   return (
     <View flex>
-      <Categories categoryId={categoryId} onPress={onCategoryPress} />
+      <Categories categoryId={categoryId} onPress={onCategoryPress}/>
     </View>
   );
 };

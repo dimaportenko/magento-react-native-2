@@ -1,5 +1,5 @@
 /** @flow */
-import { Typography, Colors } from 'react-native-ui-lib';
+import { Typography, Colors, Spacings } from 'react-native-ui-lib';
 
 export const themeInit = () => {
   Colors.loadColors({
@@ -12,5 +12,10 @@ export const themeInit = () => {
     h2: { fontSize: 46, fontWeight: '300', lineHeight: 64 },
 
     categoryItemTitle: { fontSize: 28, fontWeight: '300' },
+    productItemTitle: { fontSize: 12, fontWeight: '300' }
+  });
+
+  Spacings.loadSpacings({
+    page: 15,
   });
 };
