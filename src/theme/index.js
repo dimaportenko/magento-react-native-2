@@ -1,3 +1,4 @@
+/** @flow */
 import { Typography, Colors } from 'react-native-ui-lib';
 
 export const themeInit = () => {

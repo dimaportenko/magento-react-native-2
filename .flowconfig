@@ -15,6 +15,8 @@ node_modules/warning/.*
 ; Flow doesn't support platforms
 .*/Libraries/Utilities/LoadingView.js
 
+<PROJECT_ROOT>/.eslintrc.js
+
 [untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
 
