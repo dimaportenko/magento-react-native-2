@@ -13,7 +13,8 @@ const COLUMN_SIZE = (Constants.screenWidth - 3 * Spacings.s4) / 2;
 const BORDER_RADIUS = 10;
 
 type Props = {
-  product: Product
+  product: Product,
+  onPress(product: Product): void,
 }
 
 type ImageType = {
@@ -24,7 +25,7 @@ type ImageType = {
 };
 
 export const ProductItem = (props: Props) => {
-  const { product } = props;
+  const { product, onPress } = props;
   const [image: ?ImageType, setImage] = useState(null);
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export const ProductItem = (props: Props) => {
     <Card
       key={product.small_image.url}
       style={styles.card}
-      onPress={_.noop}
+      onPress={() => { onPress(product)}}
       borderRadius={BORDER_RADIUS}
       enableShadow
       marginB-s4

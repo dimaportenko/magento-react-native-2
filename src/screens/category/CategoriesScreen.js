@@ -15,7 +15,8 @@ export const CategoriesScreen = () => {
 
   const onCategoryPress = (category: Category) => {
     const route: string = category.children_count > 0
-      ? routes.CATEGORIES_SCREEN
+      ? routes.CATEGORY_SCREEN
+      // ? routes.CATEGORIES_SCREEN
       : routes.CATEGORY_SCREEN;
 
     navigation.push(route, {

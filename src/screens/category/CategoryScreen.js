@@ -2,17 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { View, Text, Spacings, AnimatableManager } from 'react-native-ui-lib';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import { magentoConfig } from '../../../magento.config';
 import { useCategory } from '../../logic/category/useCategory';
 import { GET_CATEGORY } from '../../queries/getCategory';
 import type { Product } from '../../logic/types/magento';
 import { ProductItem } from '../../components/category/ProductItem';
+import * as routes from '../../navigation/types';
 
 
 export const CategoryScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const [products: Product[], setProducts] = useState([]);
   const [categoryId] = useState(route?.params?.categoryId || magentoConfig.rootCategoryId);
   const { data, loading, error } = useCategory({
@@ -43,11 +45,18 @@ export const CategoryScreen = () => {
     );
   }
 
+  const onProductItemPress = (product: Product): void => {
+    // console.warn('product', product);
+    navigation.push(routes.PRODUCT_SCREEN, {
+      product,
+    });
+  };
+
   const renderItem = (item: Product, index: number): React$Node => {
     const animationProps = AnimatableManager.getEntranceByIndex(index);
     return (
       <Animatable.View key={index} {...animationProps}>
-        <ProductItem product={item} />
+        <ProductItem product={item} onPress={onProductItemPress} />
       </Animatable.View>
     );
   };
