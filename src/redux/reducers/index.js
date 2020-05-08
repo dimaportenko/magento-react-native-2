@@ -1,6 +1,13 @@
+/** @noflow */
 import { combineReducers } from 'redux';
-import category from './category';
+import storeConfig from './storeConfig';
+
+import type { StoreConfigRedux } from './storeConfig';
+
+export type StateRedux = {
+  storeConfig: StoreConfigRedux,
+}
 
 export default combineReducers({
-  category,
+  storeConfig,
 });

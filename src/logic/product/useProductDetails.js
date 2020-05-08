@@ -5,11 +5,23 @@
 import React, { useMemo, useState } from 'react';
 import { findMatchingVariant } from '../utils/findMatchingProductVariant';
 
-import type { Product } from '../types/magento';
+import type { MediaGalleryEntry, Product, ProductDescription } from '../types/magento';
 import { isProductConfigurable } from '../utils/isProductConfigurable';
 
 type Props = {
   product: Product
+};
+
+export type ProductDetailsData = {
+  productDetails: ProductDetails,
+  mediaGalleryEntries: Array<MediaGalleryEntry>,
+}
+
+export type ProductDetails = {
+  description: ProductDescription,
+  name: string,
+  // price: productPrice,
+  sku: string,
 };
 
 const INITIAL_OPTION_CODES = new Map();
@@ -51,7 +63,7 @@ const deriveOptionSelectionsFromProduct = product => {
   return initialOptionSelections;
 };
 
-const getMediaGalleryEntries = (product: Product, optionCodes, optionSelections) => {
+const getMediaGalleryEntries = (product: Product, optionCodes, optionSelections): Array<MediaGalleryEntry>  => {
   let value = [];
   const { media_gallery_entries } = product;
 
@@ -100,7 +112,7 @@ const getIsMissingOptions = (product, optionSelections) => {
   return numProductSelections < numProductOptions;
 };
 
-export const useProductDetails = (props: Props) => {
+export const useProductDetails = (props: Props): ProductDetailsData => {
   const { product } = props;
 
   const productType = product.__typename;

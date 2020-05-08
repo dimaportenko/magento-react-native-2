@@ -1,3 +1,4 @@
+/** @noflow */
 import { gql } from '@apollo/client';
 
 export const GET_CATEGORY_LIST = gql`

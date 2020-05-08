@@ -15,7 +15,13 @@ export type Category = {
       }
     }
   }
-};
+}
+
+export type StoreConfig = {
+  __typename: 'StoreConfig',
+  base_media_url: string,
+  secure_base_media_url: string,
+}
 
 export type ConfigurableVariant = {
   attributes: ConfigurableAttributeOption[],
@@ -28,14 +34,15 @@ export type ConfigurableAttributeOption = {
   value_index: number,
 }
 
+export type ProductDescription = {
+  html: string
+}
 
 type ProductBase = {|
   id: number,
   name: string,
   sku: string,
-  description: {
-    html: string,
-  },
+  description: ProductDescription,
   small_image: {
     url: string,
   },
@@ -50,7 +57,7 @@ type ProductBase = {|
   media_gallery_entries: MediaGalleryEntry[],
 |}
 
-type MediaGalleryEntry = {
+export type MediaGalleryEntry = {
   id: number,
   media_type: string,
   label: string,

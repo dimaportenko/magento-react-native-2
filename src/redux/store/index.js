@@ -1,3 +1,4 @@
+/** @noflow */
 import { createStore, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';

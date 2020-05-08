@@ -8,6 +8,7 @@ import { useRoute } from '@react-navigation/native';
 
 import type { Product } from '../../logic/types/magento';
 import { useProductDetails } from '../../logic/product/useProductDetails';
+import { MediaGallery } from '../../components/media/MediaGallery';
 
 export const ProductScreen = () => {
   const route = useRoute();
@@ -17,7 +18,8 @@ export const ProductScreen = () => {
   console.warn('mediaGalleryEntries', mediaGalleryEntries);
 
   return (
-    <View center flex>
+    <View flex>
+      <MediaGallery entries={mediaGalleryEntries} />
       <Text>{product.name}</Text>
     </View>
   );
