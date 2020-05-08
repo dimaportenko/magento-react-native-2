@@ -6,6 +6,7 @@ import React, { useMemo, useState } from 'react';
 import { findMatchingVariant } from '../utils/findMatchingProductVariant';
 
 import type { Product } from '../types/magento';
+import { isProductConfigurable } from '../utils/isProductConfigurable';
 
 type Props = {
   product: Product
@@ -17,8 +18,6 @@ const INITIAL_QUANTITY = 1;
 
 const SUPPORTED_PRODUCT_TYPES = ['SimpleProduct', 'ConfigurableProduct'];
 
-const isProductConfigurable = product =>
-  product.__typename === 'ConfigurableProduct';
 
 const deriveOptionCodesFromProduct = product => {
   // If this is a simple product it has no option codes.
@@ -52,28 +51,28 @@ const deriveOptionSelectionsFromProduct = product => {
   return initialOptionSelections;
 };
 
-const getMediaGalleryEntries = (product, optionCodes, optionSelections) => {
+const getMediaGalleryEntries = (product: Product, optionCodes, optionSelections) => {
   let value = [];
-
-  const { media_gallery_entries, variants } = product;
-  const isConfigurable = isProductConfigurable(product);
+  const { media_gallery_entries } = product;
 
   // Selections are initialized to "code => undefined". Once we select a value, like color, the selections change. This filters out unselected options.
   const optionsSelected =
     Array.from(optionSelections.values()).filter(value => !!value).length >
     0;
 
-  if (!isConfigurable || !optionsSelected) {
+  if (!isProductConfigurable(product) || !optionsSelected) {
     value = media_gallery_entries;
   } else {
     // If any of the possible variants matches the selection add that
     // variant's image to the media gallery. NOTE: This _can_, and does,
     // include variants such as size. If Magento is configured to display
     // an image for a size attribute, it will render that image.
+    const { variants } = product;
+
     const item = findMatchingVariant({
       optionCodes,
       optionSelections,
-      variants
+      variants,
     });
 
     value = item
@@ -139,7 +138,7 @@ export const useProductDetails = (props: Props) => {
     description: product.description,
     name: product.name,
     // price: productPrice,
-    sku: product.sku
+    sku: product.sku,
   };
 
   return {
