@@ -17,7 +17,7 @@ export type Category = {
   }
 };
 
-type ProductGeneral = {
+type ProductBase = {|
   id: number,
   name: string,
   sku: string,
@@ -35,11 +35,10 @@ type ProductGeneral = {
       }
     }
   },
-}
+|}
 
-export type SimpleProduct = {
+export type SimpleProduct = ProductBase & {
   __typename: 'SimpleProduct',
-  ...ProductGeneral,
 }
 
 type ConfigurableProductOptions = {
@@ -47,9 +46,8 @@ type ConfigurableProductOptions = {
   attribute_code: string,
 }
 
-export type ConfigurableProduct = {
+export type ConfigurableProduct = ProductBase & {
   __typename: 'ConfigurableProduct',
-  ...ProductGeneral,
   configurable_options: ConfigurableProductOptions[],
 }
 
