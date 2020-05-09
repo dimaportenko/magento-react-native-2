@@ -54,10 +54,11 @@ export const RootStack = () => {
               name={types.PRODUCT_SCREEN}
               component={ProductScreen}
               options={({ navigation, route }) => {
-                const product: Product = route.params.product;
+                // const product: Product = route.params.product;
                 return {
-                  title: product.name || 'Product',
-                  headerBackTitleVisible: false,
+                  // title: product.name || 'Product',
+                  // headerBackTitleVisible: false,
+                  headerShown: false,
                 };
               }}
             />

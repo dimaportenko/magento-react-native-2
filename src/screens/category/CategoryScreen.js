@@ -26,7 +26,6 @@ export const CategoryScreen = () => {
     if (data) {
       setProducts(data.products.items || []);
     }
-    console.log(data, loading, error);
   }, [data, loading, error]);
 
   if (loading) {
@@ -46,7 +45,6 @@ export const CategoryScreen = () => {
   }
 
   const onProductItemPress = (product: Product): void => {
-    // console.warn('product', product);
     navigation.push(routes.PRODUCT_SCREEN, {
       product,
     });

@@ -90,3 +90,5 @@ export type ConfigurableProduct = {
 }
 
 export type Product = ConfigurableProduct | SimpleProduct;
+
+export type MediaPathType = 'image-product' | 'image-category';

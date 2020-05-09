@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Text, View, Card, Colors } from 'react-native-ui-lib';
+import FastImage from 'react-native-fast-image';
 import stc from 'string-to-color';
 import type { Category } from '../../logic/types/magento';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
@@ -46,10 +47,8 @@ export const CategoryItem = (props: Props) => {
     if (image.url.length > 0) {
       return (
         <View style={[styles.imageWrap, imageWrapStyle]}>
-          <Image
+          <FastImage
             source={{ uri: image.url }}
-            height={'100%'}
-            width={IMAGE_WIDTH}
             style={styles.image}
             resizeMode="contain"
           />
