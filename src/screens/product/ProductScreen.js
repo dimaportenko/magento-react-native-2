@@ -3,7 +3,7 @@
  * Created by Dima Portenko on 07.05.2020
  */
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Platform } from 'react-native';
 import { View, Colors, Constants } from 'react-native-ui-lib';
 import { useRoute } from '@react-navigation/native';
 
@@ -31,6 +31,9 @@ export const ProductScreen = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Platform.select({
+      ios: Constants.statusBarHeight,
+      android: 0,
+    }),
   },
 });
