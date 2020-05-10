@@ -57,6 +57,8 @@ type ProductBase = {|
   media_gallery_entries: MediaGalleryEntry[],
 |}
 
+export type PriceAmountType = $PropertyType<$PropertyType<$PropertyType<ProductBase, 'price'>, 'regularPrice'>, 'amount'>
+
 export type MediaGalleryEntry = {
   id: number,
   media_type: string,

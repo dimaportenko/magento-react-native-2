@@ -5,7 +5,7 @@
 import React, { useMemo, useState } from 'react';
 import { findMatchingVariant } from '../utils/findMatchingProductVariant';
 
-import type { MediaGalleryEntry, Product, ProductDescription } from '../types/magento';
+import type { MediaGalleryEntry, PriceAmountType, Product, ProductDescription } from '../types/magento';
 import { isProductConfigurable } from '../utils/isProductConfigurable';
 
 type Props = {
@@ -20,7 +20,7 @@ export type ProductDetailsData = {
 export type ProductDetails = {
   description: ProductDescription,
   name: string,
-  // price: productPrice,
+  price: PriceAmountType,
   sku: string,
 };
 
@@ -112,6 +112,31 @@ const getIsMissingOptions = (product, optionSelections) => {
   return numProductSelections < numProductOptions;
 };
 
+const getConfigPrice = (product, optionCodes, optionSelections) => {
+  let value;
+
+  const optionsSelected =
+    Array.from(optionSelections.values()).filter(value => !!value).length >
+    0;
+
+  if (!isProductConfigurable(product) || !optionsSelected) {
+    value = product.price.regularPrice.amount;
+  } else {
+    const { variants } = product;
+    const item = findMatchingVariant({
+      optionCodes,
+      optionSelections,
+      variants,
+    });
+
+    value = item
+      ? item.product.price.regularPrice.amount
+      : product.price.regularPrice.amount;
+  }
+
+  return value;
+};
+
 export const useProductDetails = (props: Props): ProductDetailsData => {
   const { product } = props;
 
@@ -145,11 +170,15 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     [product, optionCodes, optionSelections]
   );
 
+  const productPrice = useMemo(
+    () => getConfigPrice(product, optionCodes, optionSelections),
+    [product, optionCodes, optionSelections]
+  );
 
   const productDetails = {
     description: product.description,
     name: product.name,
-    // price: productPrice,
+    price: productPrice,
     sku: product.sku,
   };
 

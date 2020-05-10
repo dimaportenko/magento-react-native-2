@@ -4,24 +4,36 @@
  */
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Platform } from 'react-native';
-import { View, Colors, Constants } from 'react-native-ui-lib';
+import { View, Colors, Constants, Text } from 'react-native-ui-lib';
 import { useRoute } from '@react-navigation/native';
 
 import type { Product } from '../../logic/types/magento';
+
 import { useProductDetails } from '../../logic/product/useProductDetails';
 import { MediaGallery } from '../../components/media/MediaGallery';
 import { BackButton } from '../../components/navigation/BackButton';
+import { Price } from '../../components/price/Price';
 
 
 export const ProductScreen = () => {
   const route = useRoute();
-  const [product: Product] = useState(route.params.product);
+  const [product] = useState((route.params.product: Product));
   const { mediaGalleryEntries, productDetails } = useProductDetails({ product });
 
   return (
     <ScrollView style={styles.container}>
       <View flex>
         <MediaGallery entries={mediaGalleryEntries} />
+        <View row padding-page spread>
+          <Text productDetailsTitle>{product.name}</Text>
+          <Price
+            currency={productDetails.price.currency}
+            value={productDetails.price.value}
+            textProps={{
+              productDetailsTitle: true,
+            }}
+          />
+        </View>
         <BackButton />
       </View>
     </ScrollView>

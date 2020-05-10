@@ -8,6 +8,7 @@ import { Text, View, Card, Image, Spacings, Constants } from 'react-native-ui-li
 import _ from 'lodash';
 
 import type { Product } from '../../logic/types/magento';
+import { Price } from '../price/Price';
 
 const COLUMN_SIZE = (Constants.screenWidth - 3 * Spacings.s4) / 2;
 const BORDER_RADIUS = 10;
@@ -86,9 +87,14 @@ export const ProductItem = (props: Props) => {
       {renderImage()}
       <View margin-10 >
         <Text center productItemTitle>{product.name?.replace(/\&(.*?);/gm, '')}</Text>
-        <Text center productItemTitle>
-          {`${product.price.regularPrice.amount.currency} ${product.price.regularPrice.amount.value}`}
-        </Text>
+        <Price
+          currency={product.price.regularPrice.amount.currency}
+          value={product.price.regularPrice.amount.value}
+          textProps={{
+            center: true,
+            productItemTitle: true,
+          }}
+        />
       </View>
     </Card>
   );

@@ -7,12 +7,16 @@ export const themeInit = () => {
     gold: '#FFD700',
   });
 
-  Typography.loadTypographies({
-    h1: { fontSize: 58, fontWeight: '300', lineHeight: 80 },
-    h2: { fontSize: 46, fontWeight: '300', lineHeight: 64 },
+  const defaultFont = {
+    fontSize: 14,
+    fontWeight: '300',
+  };
 
-    categoryItemTitle: { fontSize: 28, fontWeight: '300' },
-    productItemTitle: { fontSize: 12, fontWeight: '300' },
+  Typography.loadTypographies({
+    defaultF: defaultFont,
+    categoryItemTitle: { ...defaultFont, fontSize: 28 },
+    productItemTitle: { ...defaultFont, fontSize: 12 },
+    productDetailsTitle: { ...defaultFont, fontSize: 18 },
   });
 
   Spacings.loadSpacings({
