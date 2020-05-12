@@ -77,10 +77,20 @@ export type SimpleProduct = {
   __typename: 'SimpleProduct',
 }
 
-type ConfigurableProductOptions = {
+export type ConfigurableProductOptionsValues = {
+  value_index: number,
+  label: string,
+  default_label: string,
+  store_label: string,
+  use_default_value: boolean,
+}
+
+export type ConfigurableProductOptions = {
   id: number,
   attribute_code: string,
   attribute_id: string,
+  label: string,
+  values: Array<ConfigurableProductOptionsValues>,
 }
 
 export type ConfigurableProduct = {

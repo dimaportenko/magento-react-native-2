@@ -13,12 +13,21 @@ import { useProductDetails } from '../../logic/product/useProductDetails';
 import { MediaGallery } from '../../components/media/MediaGallery';
 import { BackButton } from '../../components/navigation/BackButton';
 import { Price } from '../../components/price/Price';
+import { isProductConfigurable } from '../../logic/utils/isProductConfigurable';
+import { Options } from '../../components/product/Options';
 
 
 export const ProductScreen = () => {
   const route = useRoute();
   const [product] = useState((route.params.product: Product));
-  const { mediaGalleryEntries, productDetails } = useProductDetails({ product });
+  const { mediaGalleryEntries, productDetails, handleSelectionChange } = useProductDetails({ product });
+
+  const options = isProductConfigurable(product) ? (
+    <Options
+      onSelectionChange={handleSelectionChange}
+      options={product.configurable_options}
+    />
+  ) : null;
 
   return (
     <ScrollView style={styles.container}>
@@ -33,6 +42,9 @@ export const ProductScreen = () => {
               productDetailsTitle: true,
             }}
           />
+        </View>
+        <View paddingH-page>
+          {options}
         </View>
         <BackButton />
       </View>

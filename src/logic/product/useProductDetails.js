@@ -2,7 +2,7 @@
  * @flow
  * Created by Dima Portenko on 07.05.2020
  */
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { findMatchingVariant } from '../utils/findMatchingProductVariant';
 
 import type { MediaGalleryEntry, PriceAmountType, Product, ProductDescription } from '../types/magento';
@@ -15,6 +15,7 @@ type Props = {
 export type ProductDetailsData = {
   productDetails: ProductDetails,
   mediaGalleryEntries: Array<MediaGalleryEntry>,
+  handleSelectionChange: (optionId: string, selection: ?string) => void,
 }
 
 export type ProductDetails = {
@@ -25,7 +26,7 @@ export type ProductDetails = {
 };
 
 const INITIAL_OPTION_CODES = new Map();
-const INITIAL_OPTION_SELECTIONS = new Map();
+const INITIAL_OPTION_SELECTIONS = new Map<string, ?string>();
 const INITIAL_QUANTITY = 1;
 
 const SUPPORTED_PRODUCT_TYPES = ['SimpleProduct', 'ConfigurableProduct'];
@@ -50,12 +51,12 @@ const deriveOptionCodesFromProduct = product => {
 };
 
 // Similar to deriving the initial codes for each option.
-const deriveOptionSelectionsFromProduct = product => {
+const deriveOptionSelectionsFromProduct = (product: Product): Map<string, ?string> => {
   if (!isProductConfigurable(product)) {
     return INITIAL_OPTION_SELECTIONS;
   }
 
-  const initialOptionSelections = new Map();
+  const initialOptionSelections = new Map<string, ?string>();
   for (const { attribute_id } of product.configurable_options) {
     initialOptionSelections.set(attribute_id, undefined);
   }
@@ -175,6 +176,17 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     [product, optionCodes, optionSelections]
   );
 
+  const handleSelectionChange = useCallback(
+    (optionId: string, selection: ?string) => {
+      // We must create a new Map here so that React knows that the value
+      // of optionSelections has changed.
+      const nextOptionSelections = new Map([...optionSelections]);
+      nextOptionSelections.set(optionId, selection);
+      setOptionSelections(nextOptionSelections);
+    },
+    [optionSelections]
+  );
+
   const productDetails = {
     description: product.description,
     name: product.name,
@@ -185,7 +197,7 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
   return {
     // breadcrumbCategoryId,
     // handleAddToCart,
-    // handleSelectionChange,
+    handleSelectionChange,
     // handleSetQuantity,
     // isAddToCartDisabled:
     //   !isSupportedProductType || isAddingItem || isMissingOptions,
