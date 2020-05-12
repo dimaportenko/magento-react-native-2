@@ -11,7 +11,7 @@ export const findMatchingVariant = ({
   }: {
     variants: ConfigurableVariant[],
     optionCodes: Map<string, string>,
-    optionSelections: Map<string, ?string>,
+    optionSelections: Map<string, ?number>,
   }) => {
 
   return variants.find(({ attributes, product }) => {

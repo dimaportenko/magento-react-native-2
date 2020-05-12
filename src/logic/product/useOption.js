@@ -9,13 +9,13 @@ import type { ConfigurableProductOptionsValues } from '../types/magento';
 type Props = {
   attribute_id: string,
   label: string,
-  onSelectionChange: (optionId: string, selection: ?string) => void,
-  selectedValue: string,
+  onSelectionChange: (optionId: string, selection: ?number) => void,
+  selectedValue: ?string,
   values: Array<ConfigurableProductOptionsValues>,
 }
 
 type Result = {
-  handleSelectionChange: (selection: string) => void,
+  handleSelectionChange: (selection: number) => void,
   initialSelection: ConfigurableProductOptionsValues,
   selectedValueLabel: string,
   selectedValueDescription: string,
@@ -27,7 +27,7 @@ export const useOption = (props: Props): Result => {
     label,
     onSelectionChange,
     selectedValue,
-    values
+    values,
   } = props;
 
   const [selection, setSelection] = useState(null);

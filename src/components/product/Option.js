@@ -7,8 +7,8 @@ import { View, Text } from 'react-native-ui-lib';
 
 import { useOption } from '../../logic/product/useOption';
 import getOptionType from '../../logic/utils/product/getOptionType';
-import { TileList } from '../../logic/product/TileList';
-import { SwatchList } from '../../logic/product/SwatchList';
+import { TileList } from './TileList';
+import { SwatchList } from './SwatchList';
 
 import type { ConfigurableProductOptionsValues } from '../../logic/types/magento';
 
@@ -16,12 +16,10 @@ type Props = {
   attribute_code: string,
   attribute_id: string,
   label: string,
-  onSelectionChange: (optionId: string, selection: ?string) => void,
-  selectedValue: string,
+  onSelectionChange: (optionId: string, selection: ?number) => void,
+  selectedValue: ?string,
   values: Array<ConfigurableProductOptionsValues>,
 }
-
-const getItemKey = ({ value_index }: { value_index: string }): string => value_index;
 
 // TODO: get an explicit field from the API
 // that identifies an attribute as a swatch
@@ -38,20 +36,20 @@ export const Option = (props: Props) => {
     label,
     onSelectionChange,
     selectedValue,
-    values
+    values,
   } = props;
 
   const {
     handleSelectionChange,
     initialSelection,
     selectedValueLabel,
-    selectedValueDescription
+    selectedValueDescription,
   } = useOption({
     attribute_id,
     label,
     onSelectionChange,
     selectedValue,
-    values
+    values,
   });
 
   const ValueList = useMemo(
@@ -62,7 +60,6 @@ export const Option = (props: Props) => {
     <View>
       <Text optionTitle>{label}</Text>
       <ValueList
-        getItemKey={getItemKey}
         selectedValue={initialSelection}
         items={values}
         onSelectionChange={handleSelectionChange}

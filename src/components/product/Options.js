@@ -15,7 +15,7 @@ type SelectedValue = {
 
 type Props = {
   options: Array<ConfigurableProductOptions>,
-  onSelectionChange: (string, ?string) => void,
+  onSelectionChange: (string, ?number) => void,
   selectedValues?: Array<SelectedValue>,
 }
 

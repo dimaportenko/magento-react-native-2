@@ -15,7 +15,7 @@ type Props = {
 export type ProductDetailsData = {
   productDetails: ProductDetails,
   mediaGalleryEntries: Array<MediaGalleryEntry>,
-  handleSelectionChange: (optionId: string, selection: ?string) => void,
+  handleSelectionChange: (optionId: string, selection: ?number) => void,
 }
 
 export type ProductDetails = {
@@ -26,7 +26,7 @@ export type ProductDetails = {
 };
 
 const INITIAL_OPTION_CODES = new Map();
-const INITIAL_OPTION_SELECTIONS = new Map<string, ?string>();
+const INITIAL_OPTION_SELECTIONS = new Map<string, ?number>();
 const INITIAL_QUANTITY = 1;
 
 const SUPPORTED_PRODUCT_TYPES = ['SimpleProduct', 'ConfigurableProduct'];
@@ -51,12 +51,12 @@ const deriveOptionCodesFromProduct = product => {
 };
 
 // Similar to deriving the initial codes for each option.
-const deriveOptionSelectionsFromProduct = (product: Product): Map<string, ?string> => {
+const deriveOptionSelectionsFromProduct = (product: Product): Map<string, ?number> => {
   if (!isProductConfigurable(product)) {
     return INITIAL_OPTION_SELECTIONS;
   }
 
-  const initialOptionSelections = new Map<string, ?string>();
+  const initialOptionSelections = new Map<string, ?number>();
   for (const { attribute_id } of product.configurable_options) {
     initialOptionSelections.set(attribute_id, undefined);
   }
@@ -177,9 +177,10 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
   );
 
   const handleSelectionChange = useCallback(
-    (optionId: string, selection: ?string) => {
+    (optionId: string, selection: ?number) => {
       // We must create a new Map here so that React knows that the value
       // of optionSelections has changed.
+
       const nextOptionSelections = new Map([...optionSelections]);
       nextOptionSelections.set(optionId, selection);
       setOptionSelections(nextOptionSelections);

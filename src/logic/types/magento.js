@@ -77,12 +77,19 @@ export type SimpleProduct = {
   __typename: 'SimpleProduct',
 }
 
+export type SwatchData = {
+  type: string,
+  value: string,
+  thumbnail?: string,
+}
+
 export type ConfigurableProductOptionsValues = {
   value_index: number,
   label: string,
   default_label: string,
   store_label: string,
   use_default_value: boolean,
+  swatch_data?: SwatchData,
 }
 
 export type ConfigurableProductOptions = {

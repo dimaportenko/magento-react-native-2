@@ -10,19 +10,19 @@ type SelectedValue = {
 }
 
 type Props = {
-  onSelectionChange: (string, ?string) => void,
+  onSelectionChange: (string, ?number) => void,
   selectedValues: Array<SelectedValue>
 }
 
 type Result = {
-  handleSelectionChange: (optionId: string, selection: ?string) => void,
+  handleSelectionChange: (optionId: string, selection: ?number) => void,
   selectedValueMap: Map<string, string>,
 }
 
 export const useOptions = (props: Props): Result => {
   const { onSelectionChange, selectedValues } = props;
   const handleSelectionChange = useCallback(
-    (optionId: string, selection: ?string) => {
+    (optionId: string, selection: ?number) => {
       if (onSelectionChange) {
         onSelectionChange(optionId, selection);
       }

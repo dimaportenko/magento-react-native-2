@@ -3,18 +3,11 @@ import { gql } from '@apollo/client';
 
 export const GET_CATEGORY = gql`
     query category(
-        $id: Int!
         $pageSize: Int!
         $currentPage: Int!
         $filters: ProductAttributeFilterInput!
         $sort: ProductAttributeSortInput
     ) {
-        category(id: $id) {
-            id
-            description
-            name
-            product_count
-        }
         products(
             pageSize: $pageSize
             currentPage: $currentPage
@@ -61,6 +54,12 @@ export const GET_CATEGORY = gql`
                             store_label
                             use_default_value
                             value_index
+                            swatch_data {
+                                ... on ImageSwatchData {
+                                    thumbnail
+                                }
+                                value
+                            }
                         }
                     }
                     variants {
@@ -79,6 +78,14 @@ export const GET_CATEGORY = gql`
                             }
                             sku
                             stock_status
+                            price {
+                                regularPrice {
+                                    amount {
+                                        currency
+                                        value
+                                    }
+                                }
+                            }
                         }
                     }
                 }
