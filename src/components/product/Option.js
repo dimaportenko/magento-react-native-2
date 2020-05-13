@@ -6,7 +6,8 @@ import React, { useMemo } from 'react';
 import { View, Text } from 'react-native-ui-lib';
 
 import { useOption } from '../../logic/product/useOption';
-import getOptionType from '../../logic/utils/product/getOptionType';
+
+// TODO: implement TileList logic
 import { TileList } from './TileList';
 import { SwatchList } from './SwatchList';
 
@@ -56,8 +57,11 @@ export const Option = (props: Props) => {
     [isSwatch]);
 
   return (
-    <View>
-      <Text optionTitle>{label}</Text>
+    <View marginB-10>
+      <View row marginB-5>
+        <Text optionTitle>{label}</Text>
+        <Text optionValue>{`    ${selectedValueDescription}`}</Text>
+      </View>
       <ValueList
         selectedValue={initialSelection}
         items={values}

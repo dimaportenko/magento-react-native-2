@@ -17,6 +17,9 @@ export const themeInit = () => {
     categoryItemTitle: { ...defaultFont, fontSize: 28 },
     productItemTitle: { ...defaultFont, fontSize: 12 },
     productDetailsTitle: { ...defaultFont, fontSize: 18 },
+
+    optionTitle: { fontWeight: '300', fontSize: 18 },
+    optionValue: { fontWeight: '300', fontSize: 18 },
   });
 
   Spacings.loadSpacings({

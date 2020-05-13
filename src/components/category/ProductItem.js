@@ -9,6 +9,7 @@ import _ from 'lodash';
 
 import type { Product } from '../../logic/types/magento';
 import { Price } from '../price/Price';
+import { clearHtmlText } from '../../logic/utils/clearHtmlText';
 
 const COLUMN_SIZE = (Constants.screenWidth - 3 * Spacings.s4) / 2;
 const BORDER_RADIUS = 10;
@@ -86,7 +87,7 @@ export const ProductItem = (props: Props) => {
     >
       {renderImage()}
       <View margin-10 >
-        <Text center productItemTitle>{product.name?.replace(/\&(.*?);/gm, '')}</Text>
+        <Text center productItemTitle>{clearHtmlText(product.name)}</Text>
         <Price
           currency={product.price.regularPrice.amount.currency}
           value={product.price.regularPrice.amount.value}

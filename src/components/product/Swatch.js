@@ -55,7 +55,7 @@ export const Swatch = (props: Props) => {
         return icon;
       }
       case 'TextSwatchData': {
-        return <Text style={color}>{swatch_data?.value}</Text>;
+        return <Text optionTitle style={color}>{swatch_data?.value}</Text>;
       }
       // TODO: add image swatch
       case 'ImageSwatchData': {

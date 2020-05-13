@@ -15,6 +15,7 @@ import { BackButton } from '../../components/navigation/BackButton';
 import { Price } from '../../components/price/Price';
 import { isProductConfigurable } from '../../logic/utils/isProductConfigurable';
 import { Options } from '../../components/product/Options';
+import { clearHtmlText } from '../../logic/utils/clearHtmlText';
 
 
 export const ProductScreen = () => {
@@ -34,7 +35,7 @@ export const ProductScreen = () => {
       <View flex>
         <MediaGallery entries={mediaGalleryEntries} />
         <View row padding-page spread>
-          <Text productDetailsTitle>{product.name}</Text>
+          <Text productDetailsTitle>{clearHtmlText(product.name)}</Text>
           <Price
             currency={productDetails.price.currency}
             value={productDetails.price.value}
