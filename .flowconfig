@@ -51,7 +51,6 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [lints]
-;all=warn
 sketchy-null-number=warn
 sketchy-null-mixed=warn
 sketchy-number=warn

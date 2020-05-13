@@ -23,10 +23,8 @@ type Props = {
 
 // TODO: get an explicit field from the API
 // that identifies an attribute as a swatch
-const getListComponent = (attribute_code, values) => {
-  const optionType = getOptionType({ attribute_code, values });
-
-  return optionType === 'swatch' ? SwatchList : TileList;
+const getListComponent = (isSwatch: boolean) => {
+  return isSwatch ? SwatchList : TileList;
 };
 
 export const Option = (props: Props) => {
@@ -44,6 +42,7 @@ export const Option = (props: Props) => {
     initialSelection,
     selectedValueLabel,
     selectedValueDescription,
+    isSwatch,
   } = useOption({
     attribute_id,
     label,
@@ -53,8 +52,8 @@ export const Option = (props: Props) => {
   });
 
   const ValueList = useMemo(
-    () => getListComponent(attribute_code, values),
-    [attribute_code, values]);
+    () => getListComponent(isSwatch),
+    [isSwatch]);
 
   return (
     <View>
@@ -64,7 +63,7 @@ export const Option = (props: Props) => {
         items={values}
         onSelectionChange={handleSelectionChange}
       />
-      <Text optionDescription>{`${selectedValueLabel}: ${selectedValueDescription}`}</Text>
+      {/*<Text optionDescription>{`${selectedValueLabel} ${selectedValueDescription}`}</Text>*/}
     </View>
   );
 };

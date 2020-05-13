@@ -19,6 +19,7 @@ type Result = {
   initialSelection: ConfigurableProductOptionsValues,
   selectedValueLabel: string,
   selectedValueDescription: string,
+  isSwatch: boolean,
 }
 
 export const useOption = (props: Props): Result => {
@@ -31,6 +32,7 @@ export const useOption = (props: Props): Result => {
   } = props;
 
   const [selection, setSelection] = useState(null);
+  const [isSwatch] = useState(values?.[0]?.swatch_data?.value ? true : false);
 
   const initialSelection = useMemo(() => {
     let initialSelection = {};
@@ -69,5 +71,6 @@ export const useOption = (props: Props): Result => {
     initialSelection,
     selectedValueLabel,
     selectedValueDescription,
+    isSwatch,
   };
 };

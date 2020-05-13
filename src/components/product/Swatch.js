@@ -2,9 +2,9 @@
  * @flow
  * Created by Dima Portenko on 12.05.2020
  */
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Colors } from 'react-native-ui-lib';
+import { View, Colors, Text } from 'react-native-ui-lib';
 
 import type { ConfigurableProductOptionsValues } from '../../logic/types/magento';
 import { CheckIcon } from '../icons/feather/CheckIcon';
@@ -19,6 +19,7 @@ const SWATCH_WIDTH = 48;
 
 export const Swatch = (props: Props) => {
   const backgroundColor = {};
+  const color = {};
 
   const {
     isSelected,
@@ -35,13 +36,33 @@ export const Swatch = (props: Props) => {
   }, [isSelected]);
 
   if (swatch_data) {
-    const { thumbnail, value } = swatch_data;
-    if (thumbnail) {
-
-    } else {
+    const { thumbnail, value, __typename } = swatch_data;
+    if (__typename === 'ColorSwatchData') {
       backgroundColor.backgroundColor = value;
+    } else if (__typename === 'TextSwatchData') {
+      backgroundColor.backgroundColor = isSelected ? Colors.black : Colors.white;
+      color.color = isSelected ? Colors.white : Colors.black;
+    } else if (__typename === 'ImageSwatchData') {
+      // TODO: add image swatch
+      // backgroundColor.backgroundColor = value;
     }
   }
+
+
+  const renderContent = () => {
+    switch (swatch_data?.__typename) {
+      case 'ColorSwatchData': {
+        return icon;
+      }
+      case 'TextSwatchData': {
+        return <Text style={color}>{swatch_data?.value}</Text>;
+      }
+      // TODO: add image swatch
+      case 'ImageSwatchData': {
+        return <View />
+      }
+    }
+  };
 
   return (
     <View paddingV-5 paddingR-7>
@@ -50,7 +71,7 @@ export const Swatch = (props: Props) => {
         onPress={handleClick}
       >
         <View flex center>
-          {icon}
+          {renderContent()}
         </View>
       </TouchableOpacity>
     </View>
@@ -63,5 +84,5 @@ const styles = StyleSheet.create({
     height: SWATCH_WIDTH,
     borderColor: Colors.black,
     borderWidth: 1,
-  }
+  },
 });

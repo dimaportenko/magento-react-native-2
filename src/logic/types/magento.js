@@ -77,8 +77,10 @@ export type SimpleProduct = {
   __typename: 'SimpleProduct',
 }
 
+export type SwatchType = 'ColorSwatchData' | 'TextSwatchData' | 'ImageSwatchData';
+
 export type SwatchData = {
-  type: string,
+  __typename: SwatchType,
   value: string,
   thumbnail?: string,
 }
