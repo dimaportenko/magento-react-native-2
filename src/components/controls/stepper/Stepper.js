@@ -13,8 +13,8 @@ type Props = {
 
 export const Stepper = ({ value, onValueChange }: Props) => {
 
-  const add = () => {onValueChange(++value)}
-  const minus = () => {onValueChange(--value)}
+  const add = () => onValueChange(value + 1);
+  const minus = () => onValueChange(value - 1);
 
   return (
     <View row centerV>

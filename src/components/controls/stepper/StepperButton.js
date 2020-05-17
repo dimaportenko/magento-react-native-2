@@ -17,7 +17,7 @@ type Props = {
 export const StepperButton = ({ type, onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <View flex center bg-control br60>
+      <View flex center bg-control br100>
         <Icon name={type}color={Colors.controlTint} size={16} />
       </View>
     </TouchableOpacity>

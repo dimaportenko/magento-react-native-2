@@ -1,5 +1,5 @@
 /** @flow */
-import { Typography, Colors, Spacings } from 'react-native-ui-lib';
+import { Typography, Colors, Spacings, BorderRadiuses } from 'react-native-ui-lib';
 
 export const themeInit = () => {
   Colors.loadColors({
@@ -26,5 +26,9 @@ export const themeInit = () => {
 
   Spacings.loadSpacings({
     page: 15,
+  });
+
+  BorderRadiuses.loadBorders({
+    br17: 17,
   });
 };
