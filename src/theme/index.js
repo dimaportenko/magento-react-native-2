@@ -5,6 +5,8 @@ export const themeInit = () => {
   Colors.loadColors({
     pink: '#FF69B4',
     gold: '#FFD700',
+    control: Colors.rgba(Colors.black, 0.6),
+    controlTint: Colors.white,
   });
 
   const defaultFont = {

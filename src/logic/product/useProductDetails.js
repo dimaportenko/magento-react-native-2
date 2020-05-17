@@ -16,6 +16,8 @@ export type ProductDetailsData = {
   productDetails: ProductDetails,
   mediaGalleryEntries: Array<MediaGalleryEntry>,
   handleSelectionChange: (optionId: string, selection: ?number) => void,
+  quantity: number,
+  handleSetQuantity: (value: number) => void,
 }
 
 export type ProductDetails = {
@@ -139,6 +141,7 @@ const getConfigPrice = (product, optionCodes, optionSelections) => {
 };
 
 export const useProductDetails = (props: Props): ProductDetailsData => {
+  const [quantity, setQuantity] = useState(INITIAL_QUANTITY);
   const { product } = props;
 
   const productType = product.__typename;
@@ -188,6 +191,13 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     [optionSelections]
   );
 
+  const handleSetQuantity = useCallback(
+    value => {
+      setQuantity(value);
+    },
+    [setQuantity]
+  );
+
   const productDetails = {
     description: product.description,
     name: product.name,
@@ -199,12 +209,12 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     // breadcrumbCategoryId,
     // handleAddToCart,
     handleSelectionChange,
-    // handleSetQuantity,
+    handleSetQuantity,
     // isAddToCartDisabled:
     //   !isSupportedProductType || isAddingItem || isMissingOptions,
     mediaGalleryEntries,
     productDetails,
-    // quantity
+    quantity,
   };
 };
 
