@@ -26,6 +26,7 @@ export const themeInit = () => {
 
   Spacings.loadSpacings({
     page: 15,
+    controlSize: 16,
   });
 
   BorderRadiuses.loadBorders({

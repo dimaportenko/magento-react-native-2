@@ -5,10 +5,14 @@
 
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { magentoConfig } from '../../magento.config';
+import { typePolicies } from './apolloCache';
+
 
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies
+  }),
   link: new HttpLink({
     uri: `${magentoConfig.baseUrl}graphql/`,
   }),

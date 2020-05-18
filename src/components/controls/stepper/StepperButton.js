@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Colors } from 'react-native-ui-lib';
+import { View, Colors, Spacings } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 type ButtonType = 'plus' | 'minus';
@@ -14,11 +14,11 @@ type Props = {
   type: ButtonType,
 }
 
-export const StepperButton = ({ type, onPress}: Props) => {
+export const StepperButton = ({ type, onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View flex center bg-control br100>
-        <Icon name={type}color={Colors.controlTint} size={16} />
+        <Icon name={type} color={Colors.controlTint} size={Spacings.controlSize} />
       </View>
     </TouchableOpacity>
   );

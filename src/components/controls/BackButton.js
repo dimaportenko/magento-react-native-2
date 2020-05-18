@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Colors, Text } from 'react-native-ui-lib';
+import { View, Colors, Spacings } from 'react-native-ui-lib';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -18,7 +18,7 @@ export const BackButton = () => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View flex center>
-        <Icon name="left" color={Colors.white} size={16} />
+        <Icon name="left" color={Colors.controlTint} size={Spacings.controlSize} />
       </View>
     </TouchableOpacity>
   );
