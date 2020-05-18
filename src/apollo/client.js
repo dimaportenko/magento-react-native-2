@@ -4,16 +4,27 @@
  */
 
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { persistCache } from 'apollo-cache-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 import { magentoConfig } from '../../magento.config';
 import { typePolicies } from './apolloCache';
 
-
-
-export const client = new ApolloClient({
-  cache: new InMemoryCache({
-    typePolicies
-  }),
-  link: new HttpLink({
-    uri: `${magentoConfig.baseUrl}graphql/`,
-  }),
+const cache = new InMemoryCache({
+  typePolicies,
 });
+
+export const getClient = async () => {
+  await persistCache({
+    cache,
+    storage: AsyncStorage,
+  });
+
+  const client = new ApolloClient({
+    cache,
+    link: new HttpLink({
+      uri: `${magentoConfig.baseUrl}graphql/`,
+    }),
+  });
+
+  return client;
+};

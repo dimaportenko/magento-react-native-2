@@ -15,17 +15,23 @@ import { ApolloProvider } from '@apollo/client';
 import { RootStack } from './src/navigation';
 import { themeInit } from './src/theme';
 import { persistor, store } from './src/redux/store';
-import { HomeScreen } from './src/screens/home/HomeScreen';
-import { client } from './src/apollo/client';
+import { LoadingScreen } from './src/screens/home/LoadingScreen';
+import { useApolloClient } from './src/apollo/useApolloClient';
 
 themeInit();
 
 const App: () => React$Node = () => {
+  const { client } = useApolloClient();
+
+  if (!client) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>
         <PersistGate
-          loading={<HomeScreen />}
+          loading={<LoadingScreen />}
           persistor={persistor}
         >
           <NavigationContainer>

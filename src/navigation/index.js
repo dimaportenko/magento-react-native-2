@@ -5,7 +5,7 @@ import * as types from './types';
 import { CategoriesScreen } from '../screens/category/CategoriesScreen';
 import { CategoryScreen } from '../screens/category/CategoryScreen';
 import { ProductScreen } from '../screens/product/ProductScreen';
-import { HomeScreen } from '../screens/home/HomeScreen';
+import { LoadingScreen } from '../screens/home/LoadingScreen';
 
 import type { Product, StoreConfig } from '../logic/types/magento';
 import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
@@ -14,14 +14,14 @@ const Stack = createStackNavigator();
 
 export const RootStack = () => {
   const storeConfig: ?StoreConfig = useStoreConfig();
-  
+
   return (
     <Stack.Navigator>
       {
         (storeConfig === null)
         ? (<Stack.Screen
             name={types.HOME_SCREEN}
-            component={HomeScreen}
+            component={LoadingScreen}
             options={({ navigation, route }) => {
               return {
                 headerShown: false,

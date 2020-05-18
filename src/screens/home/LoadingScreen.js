@@ -6,7 +6,7 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { View } from 'react-native-ui-lib';
 
-export const HomeScreen = () => {
+export const LoadingScreen = () => {
   return (
     <View flex center>
       <ActivityIndicator size="large" />
