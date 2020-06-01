@@ -7,10 +7,10 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { persistCache } from 'apollo-cache-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magentoConfig } from '../../magento.config';
-import { typePolicies } from './apolloCache';
+import { dataIdFromObject } from './apolloCache';
 
 const cache = new InMemoryCache({
-  typePolicies,
+  dataIdFromObject,
 });
 
 export const getClient = async () => {

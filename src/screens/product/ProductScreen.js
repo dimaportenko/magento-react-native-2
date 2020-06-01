@@ -3,70 +3,37 @@
  * Created by Dima Portenko on 07.05.2020
  */
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Platform } from 'react-native';
-import { View, Colors, Constants, Text } from 'react-native-ui-lib';
+import { StyleSheet, Platform } from 'react-native';
+import { Colors, Constants, View, Text } from 'react-native-ui-lib';
 import { useRoute } from '@react-navigation/native';
+import { ProductDetails } from '../../components/product/ProductDetails';
+import { useProduct } from '../../logic/product/useProduct';
+import { LoadingScreen } from '../home/LoadingScreen';
 
 import type { Product } from '../../logic/types/magento';
 
-import { useProductDetails } from '../../logic/product/useProductDetails';
-import { MediaGallery } from '../../components/media/MediaGallery';
-import { BackButton } from '../../components/controls/BackButton';
-import { Price } from '../../components/price/Price';
-import { isProductConfigurable } from '../../logic/utils/isProductConfigurable';
-import { Options } from '../../components/product/Options';
-import { clearHtmlText } from '../../logic/utils/clearHtmlText';
-import { Stepper } from '../../components/controls/stepper/Stepper';
-
-
 export const ProductScreen = () => {
   const route = useRoute();
-  const [product] = useState((route.params.product: Product));
-  const {
-    mediaGalleryEntries,
-    productDetails,
-    handleSelectionChange,
-    handleSetQuantity,
-    quantity,
-  } = useProductDetails({ product });
+  const [productFromNav] = useState((route.params.product: Product));
 
-  const options = isProductConfigurable(product) ? (
-    <Options
-      onSelectionChange={handleSelectionChange}
-      options={product.configurable_options}
-    />
-  ) : null;
+  const { product, error, loading } = useProduct({
+    productId: productFromNav.id,
+    urlKey: productFromNav.url_key,
+  });
+
+  if (error) {
+    return (
+      <View center>
+        <Text>{error.message}</Text>
+      </View>
+    )
+  }
+
+  if (!product || loading) {
+    return <LoadingScreen />
+  }
 
   return (
-    <ScrollView style={styles.container}>
-      <View flex>
-        <MediaGallery entries={mediaGalleryEntries} />
-        <View row padding-page spread>
-          <Text productDetailsTitle>{clearHtmlText(product.name)}</Text>
-          <Price
-            currency={productDetails.price.currency}
-            value={productDetails.price.value}
-            textProps={{
-              productDetailsTitle: true,
-            }}
-          />
-        </View>
-        <View paddingH-page paddingB-30>
-          {options}
-          <Stepper value={quantity} onValueChange={handleSetQuantity} />
-        </View>
-        <BackButton />
-      </View>
-    </ScrollView>
+    <ProductDetails  product={productFromNav} />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.white,
-    paddingTop: Platform.select({
-      ios: Constants.statusBarHeight,
-      android: 0,
-    }),
-  },
-});

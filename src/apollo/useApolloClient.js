@@ -11,7 +11,7 @@ export const useApolloClient = () => {
   const setupClient = async () => {
     const _client = await getClient();
     setClient(_client);
-  }
+  };
 
   useEffect(() => {
     setupClient();

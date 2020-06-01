@@ -42,6 +42,7 @@ type ProductBase = {|
   id: number,
   name: string,
   sku: string,
+  url_key: string,
   description: ProductDescription,
   small_image: {
     url: string,
