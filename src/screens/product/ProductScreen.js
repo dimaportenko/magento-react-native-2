@@ -34,6 +34,6 @@ export const ProductScreen = () => {
   }
 
   return (
-    <ProductDetails  product={productFromNav} />
+    <ProductDetails product={product} />
   );
 };

@@ -3,13 +3,6 @@ import { gql } from '@apollo/client';
 
 export const PRODUCT_FRAGMENT = gql`  
   fragment ProductDetails on ProductInterface {
-      __typename
-      categories {
-          id
-          breadcrumbs {
-              category_id
-          }
-      }
       description {
           html
       }
@@ -21,9 +14,6 @@ export const PRODUCT_FRAGMENT = gql`
           disabled
           file
       }
-      meta_title @include(if: $onServer)
-      meta_keyword @include(if: $onServer)
-      meta_description
       name
       price {
           regularPrice {

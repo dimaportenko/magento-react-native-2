@@ -40,11 +40,6 @@ export const useProduct = (props: Props): Result => {
     }
   }, [apolloClient, productId]);
 
-  useEffect(() => {
-    console.warn('productFromCache', productFromCache);
-
-  }, [productFromCache])
-
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, {
     // Once we're able to remove the manual cache lookup,
     // this fetch policy can change to 'cache-and-network'.

@@ -7,10 +7,11 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { persistCache } from 'apollo-cache-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magentoConfig } from '../../magento.config';
-import { dataIdFromObject } from './apolloCache';
+import { dataIdFromObject, possibleTypes } from './apolloCache';
 
 const cache = new InMemoryCache({
   dataIdFromObject,
+  possibleTypes
 });
 
 export const getClient = async () => {
@@ -25,6 +26,8 @@ export const getClient = async () => {
       uri: `${magentoConfig.baseUrl}graphql/`,
     }),
   });
+
+  // await client.resetStore();
 
   return client;
 };

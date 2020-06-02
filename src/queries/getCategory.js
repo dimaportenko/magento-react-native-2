@@ -78,14 +78,6 @@ export const GET_CATEGORY = gql`
                             }
                             sku
                             stock_status
-                            price {
-                                regularPrice {
-                                    amount {
-                                        currency
-                                        value
-                                    }
-                                }
-                            }
                         }
                     }
                 }

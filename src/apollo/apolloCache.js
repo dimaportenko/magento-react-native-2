@@ -19,6 +19,18 @@ export const MagentoGraphQLTypes = {
   SelectedConfigurableOption: 'SelectedConfigurableOption'
 };
 
+export const possibleTypes = {
+  [MagentoGraphQLTypes.ProductInterface]: [
+    MagentoGraphQLTypes.BundleProduct,
+    MagentoGraphQLTypes.ConfigurableProduct,
+    MagentoGraphQLTypes.DownloadableProduct,
+    MagentoGraphQLTypes.GiftCardProduct,
+    MagentoGraphQLTypes.GroupedProduct,
+    MagentoGraphQLTypes.SimpleProduct,
+    MagentoGraphQLTypes.VirtualProduct,
+  ],
+};
+
 export const dataIdFromObject = (object: Object) => {
   switch (object.__typename) {
     // Store all implementations of ProductInterface with the same prefix,
