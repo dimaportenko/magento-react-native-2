@@ -4,7 +4,8 @@
  */
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Platform } from 'react-native';
-import { View, Colors, Constants, Text } from 'react-native-ui-lib';
+import { View, Colors, Constants, Text, Button, Spacings } from 'react-native-ui-lib';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import type { Product } from '../../logic/types/magento';
 
@@ -38,26 +39,45 @@ export const ProductDetails = ({ product }: Props) => {
   ) : null;
 
   return (
-    <ScrollView style={styles.container}>
-      <View flex>
-        <MediaGallery entries={mediaGalleryEntries} />
-        <View row padding-page spread>
-          <Text productDetailsTitle>{clearHtmlText(product.name)}</Text>
-          <Price
-            currency={productDetails.price.currency}
-            value={productDetails.price.value}
-            textProps={{
-              productDetailsTitle: true,
-            }}
-          />
+    <View>
+      <ScrollView style={styles.container}>
+        <View flex paddingB-60>
+          <MediaGallery entries={mediaGalleryEntries} />
+          <View row padding-page spread>
+            <Text productDetailsTitle>{clearHtmlText(product.name)}</Text>
+            <Price
+              currency={productDetails.price.currency}
+              value={productDetails.price.value}
+              textProps={{
+                productDetailsTitle: true,
+              }}
+            />
+          </View>
+          <View paddingH-page paddingB-30>
+            {options}
+            <View paddingV-10>
+              <Stepper value={quantity} onValueChange={handleSetQuantity} />
+            </View>
+          </View>
+          <BackButton />
         </View>
-        <View paddingH-page paddingB-30>
-          {options}
-          <Stepper value={quantity} onValueChange={handleSetQuantity} />
-        </View>
-        <BackButton />
+      </ScrollView>
+      <View absH style={{ bottom: 0 }}>
+        <Button
+          absB
+          label="Add to Cart"
+          backgroundColor={Colors.primary}
+          fullWidth
+          size="large"
+          iconOnRight
+          iconSource={() => (
+            <View margin-10>
+              <Icon name="md-cart" color={Colors.secondary} size={Spacings.controlSize} />
+            </View>
+          )}
+        />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

@@ -53,20 +53,36 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MagentoReactNative2/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* MagentoReactNative2-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MagentoReactNative2-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* MagentoReactNative2-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagentoReactNative2-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAD5DC3C41441568E1C1079 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		33C474F0F288482D904CD197 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		36BAD3F8580EFB7BC31071E0 /* Pods-MagentoReactNative2-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-tvOSTests/Pods-MagentoReactNative2-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D5F0138F8766B80B5C5EDF2 /* libPods-MagentoReactNative2-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagentoReactNative2-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FEDC999DBA7409786A9DA72 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		5EDA842C648B4A07883E8845 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		614602877B5DFC68E3E09E37 /* libPods-MagentoReactNative2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagentoReactNative2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61E27094D89A4AF2BE2A3FCC /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		66399074210847B183226707 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		78DEC5BA004937E1F2E46AC3 /* libPods-MagentoReactNative2-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagentoReactNative2-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7989501F86B09D248C332A1B /* Pods-MagentoReactNative2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2.debug.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2/Pods-MagentoReactNative2.debug.xcconfig"; sourceTree = "<group>"; };
+		7ED511C3FAE549C1BC63E623 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		868884EEFC8F48DA8BAD63A4 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		933918D0D2DB45A0920CBCE5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		9EF8454CAE86C40B0D97E5FF /* libPods-MagentoReactNative2-MagentoReactNative2Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MagentoReactNative2-MagentoReactNative2Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDB40DF7B6375C499EE2AAF /* Pods-MagentoReactNative2-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-tvOS.release.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-tvOS/Pods-MagentoReactNative2-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		B4CD6DF7A0564012B59F012F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		B67F69205148BDAA79A94715 /* Pods-MagentoReactNative2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2.release.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2/Pods-MagentoReactNative2.release.xcconfig"; sourceTree = "<group>"; };
+		B69631C5EC7A4BDDB6F5433A /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		BE29C0E2DA164DFAB0948CDD /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		BF9F15C47FB23818C13E4ABB /* Pods-MagentoReactNative2-MagentoReactNative2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-MagentoReactNative2Tests.debug.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-MagentoReactNative2Tests/Pods-MagentoReactNative2-MagentoReactNative2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C6CE4CC382E5476EA5AD7B85 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CBA51C8D5E62FF6BD795599C /* Pods-MagentoReactNative2-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-tvOS/Pods-MagentoReactNative2-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E3953AA5429644E596C73166 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		E86D0A21C38D43E8946CA576 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		EC8CEA5A1CA0E181F352FB5B /* Pods-MagentoReactNative2-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-tvOSTests/Pods-MagentoReactNative2-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		ED2C850FF6B8A903654B3836 /* Pods-MagentoReactNative2-MagentoReactNative2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentoReactNative2-MagentoReactNative2Tests.release.xcconfig"; path = "Target Support Files/Pods-MagentoReactNative2-MagentoReactNative2Tests/Pods-MagentoReactNative2-MagentoReactNative2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		ED784189192845A195F961A3 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +196,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				156869EA7C46DB1FF8B1C6E7 /* Pods */,
+				F71751558B3B46BB92B16114 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -195,6 +212,29 @@
 				2D02E4901E0B4A5D006451C7 /* MagentoReactNative2-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F71751558B3B46BB92B16114 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED784189192845A195F961A3 /* AntDesign.ttf */,
+				B69631C5EC7A4BDDB6F5433A /* Entypo.ttf */,
+				5EDA842C648B4A07883E8845 /* EvilIcons.ttf */,
+				2EAD5DC3C41441568E1C1079 /* Feather.ttf */,
+				E3953AA5429644E596C73166 /* FontAwesome.ttf */,
+				BE29C0E2DA164DFAB0948CDD /* FontAwesome5_Brands.ttf */,
+				33C474F0F288482D904CD197 /* FontAwesome5_Regular.ttf */,
+				7ED511C3FAE549C1BC63E623 /* FontAwesome5_Solid.ttf */,
+				B4CD6DF7A0564012B59F012F /* Fontisto.ttf */,
+				868884EEFC8F48DA8BAD63A4 /* Foundation.ttf */,
+				933918D0D2DB45A0920CBCE5 /* Ionicons.ttf */,
+				66399074210847B183226707 /* MaterialCommunityIcons.ttf */,
+				61E27094D89A4AF2BE2A3FCC /* MaterialIcons.ttf */,
+				4FEDC999DBA7409786A9DA72 /* Octicons.ttf */,
+				C6CE4CC382E5476EA5AD7B85 /* SimpleLineIcons.ttf */,
+				E86D0A21C38D43E8946CA576 /* Zocial.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

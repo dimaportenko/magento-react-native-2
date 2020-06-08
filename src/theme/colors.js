@@ -1,12 +1,10 @@
 /* @flow */
 import ColorScheme from 'color-scheme';
 
-const scheme = new ColorScheme;
-scheme.from_hue(130)         // Start the scheme
-  .scheme('tetrade')     // Use the 'triade' scheme, that is, colors
-  // selected from 3 points equidistant around
-  // the color wheel.
-  .variation('soft');   // Use the 'soft' color variation
+const scheme = new ColorScheme();
+scheme.from_hue(130)
+  .scheme('tetrade')
+  .variation('soft');
 
 export const categoryColors = scheme.colors();
 

@@ -7,6 +7,9 @@ export const themeInit = () => {
     gold: '#FFD700',
     control: Colors.rgba(Colors.black, 0.6),
     controlTint: Colors.white,
+    primary: 'black',
+    secondary: 'white',
+    tertiary: '',
   });
 
   const defaultFont = {
