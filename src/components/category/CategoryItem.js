@@ -3,14 +3,15 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Text, View, Card, Colors } from 'react-native-ui-lib';
 import FastImage from 'react-native-fast-image';
-import stc from 'string-to-color';
 import type { Category } from '../../logic/types/magento';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
+import { getCategoryColorByIndex } from '../../theme/colors';
 
 type Props = {
+  index: number,
   category: Category,
   right?: boolean,
   onPress(category: Category): void,
@@ -23,7 +24,7 @@ export const CategoryItem = (props: Props) => {
   const [backgroundColor, setBackgroundColor] = useState('#fff');
   const [imageWrapStyle, setImageWrapStyle] = useState({});
   const { category, right, onPress } = props;
-  const { item, image } = useCategoryTileImage({ item: category });
+  const { image } = useCategoryTileImage({ item: category });
 
   useEffect(() => {
     if (right) {
@@ -40,8 +41,8 @@ export const CategoryItem = (props: Props) => {
   }, [right]);
 
   useEffect(() => {
-    setBackgroundColor(stc(category.name));
-  }, [category.name]);
+    setBackgroundColor(getCategoryColorByIndex(props.index));
+  }, [props.index]);
 
   const renderImage = () => {
     if (image.url.length > 0) {

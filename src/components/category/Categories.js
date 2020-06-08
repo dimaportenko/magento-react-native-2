@@ -41,7 +41,7 @@ export const Categories = (props: Props) => {
     return (
       <Animatable.View key={index} {...animationProps}>
         <View marginV-7>
-          <CategoryItem category={item} right={!!(index % 2)} onPress={props.onPress} />
+          <CategoryItem category={item} right={!!(index % 2)} onPress={props.onPress} index={index} />
         </View>
       </Animatable.View>
     );
