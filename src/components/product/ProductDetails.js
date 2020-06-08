@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Platform } from 'react-native';
 import { View, Colors, Constants, Text, Button, Spacings } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HTML from 'react-native-render-html';
 
 import type { Product } from '../../logic/types/magento';
 
@@ -41,7 +42,7 @@ export const ProductDetails = ({ product }: Props) => {
   return (
     <View>
       <ScrollView style={styles.container}>
-        <View flex paddingB-60>
+        <View flex paddingB-70>
           <MediaGallery entries={mediaGalleryEntries} />
           <View row padding-page spread>
             <Text productDetailsTitle>{clearHtmlText(product.name)}</Text>
@@ -53,11 +54,14 @@ export const ProductDetails = ({ product }: Props) => {
               }}
             />
           </View>
-          <View paddingH-page paddingB-30>
+          <View paddingH-page >
             {options}
             <View paddingV-10>
               <Stepper value={quantity} onValueChange={handleSetQuantity} />
             </View>
+          </View>
+          <View paddingH-page>
+            <HTML html={product.description.html} imagesMaxWidth={Constants.screenWidth} />
           </View>
           <BackButton />
         </View>
