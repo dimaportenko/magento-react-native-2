@@ -3,7 +3,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { Text, View, Card, Colors } from 'react-native-ui-lib';
 import FastImage from 'react-native-fast-image';
 import type { Category } from '../../logic/types/magento';
@@ -47,11 +47,17 @@ export const CategoryItem = (props: Props) => {
   const renderImage = () => {
     if (image.url.length > 0) {
       return (
-        <View style={[styles.imageWrap, imageWrapStyle]}>
+        <View style={[imageWrapStyle, styles.imageWrap]}>
+          {/*<Image*/}
+          {/*  source={{ uri: image.url }}*/}
+          {/*  style={[styles.image, StyleSheet.absoluteFillObject]}*/}
+          {/*  resizeMode="cover"*/}
+          {/*  blurRadius={10}*/}
+          {/*/>*/}
           <FastImage
             source={{ uri: image.url }}
             style={styles.image}
-            resizeMode="contain"
+            resizeMode="cover"
           />
         </View>
       );
@@ -100,7 +106,8 @@ export const CategoryItem = (props: Props) => {
 
 const styles = StyleSheet.create({
   imageWrap: {
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
+    overflow: 'hidden',
   },
   image: {
     width: IMAGE_WIDTH,

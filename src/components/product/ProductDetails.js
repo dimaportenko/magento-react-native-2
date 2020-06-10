@@ -66,7 +66,7 @@ export const ProductDetails = ({ product }: Props) => {
           <BackButton />
         </View>
       </ScrollView>
-      <View absH style={{ bottom: 0 }}>
+      <View absH bg-primary style={styles.bottomContainer}>
         <Button
           absB
           label="Add to Cart"
@@ -92,5 +92,9 @@ const styles = StyleSheet.create({
       ios: Constants.statusBarHeight,
       android: 0,
     }),
+  },
+  bottomContainer: {
+    bottom: 0,
+    paddingBottom: Constants.isIphoneX ? 10 : 0,
   },
 });
