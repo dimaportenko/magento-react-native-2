@@ -7,6 +7,11 @@ import { findMatchingVariant } from '../utils/findMatchingProductVariant';
 
 import type { MediaGalleryEntry, PriceAmountType, Product, ProductDescription } from '../types/magento';
 import { isProductConfigurable } from '../utils/isProductConfigurable';
+import { useSelector } from 'react-redux';
+import { useCart } from '../cart/useCart';
+import { appendOptionsToPayload } from '../utils/appendOptionsToPayload';
+import { useMutation } from '@apollo/client';
+import { ADD_CONFIGURABLE_MUTATION, ADD_SIMPLE_MUTATION } from '../../queries/mutations/addToCart';
 
 type Props = {
   product: Product
@@ -142,12 +147,22 @@ const getConfigPrice = (product, optionCodes, optionSelections) => {
 
 export const useProductDetails = (props: Props): ProductDetailsData => {
   const [quantity, setQuantity] = useState(INITIAL_QUANTITY);
+  const { isAddingItem } = useSelector(state => state.cart);
+  const { addItemToCart } = useCart();
   const { product } = props;
 
   const productType = product.__typename;
 
   const isSupportedProductType = SUPPORTED_PRODUCT_TYPES.includes(
     productType
+  );
+
+  const [addConfigurableProductToCart] = useMutation(
+    ADD_CONFIGURABLE_MUTATION
+  );
+
+  const [addSimpleProductToCart] = useMutation(
+    ADD_SIMPLE_MUTATION
   );
 
   const derivedOptionSelections = useMemo(
@@ -178,6 +193,47 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     () => getConfigPrice(product, optionCodes, optionSelections),
     [product, optionCodes, optionSelections]
   );
+
+  const handleAddToCart = useCallback(async () => {
+    const payload = {
+      item: product,
+      productType,
+      quantity
+    };
+
+    if (isProductConfigurable(product)) {
+      appendOptionsToPayload(payload, optionSelections, optionCodes);
+    }
+
+    if (isSupportedProductType) {
+      let addItemMutation;
+      // Use the proper mutation for the type.
+      if (productType === 'SimpleProduct') {
+        addItemMutation = addSimpleProductToCart;
+      } else if (productType === 'ConfigurableProduct') {
+        addItemMutation = addConfigurableProductToCart;
+      }
+
+      await addItemToCart({
+        ...payload,
+        addItemMutation,
+      });
+      // toggleDrawer('cart');
+    } else {
+      console.error('Unsupported product type. Cannot add to cart.');
+    }
+  }, [
+    addConfigurableProductToCart,
+    addItemToCart,
+    addSimpleProductToCart,
+    isSupportedProductType,
+    optionCodes,
+    optionSelections,
+    product,
+    productType,
+    quantity,
+    // toggleDrawer
+  ]);
 
   const handleSelectionChange = useCallback(
     (optionId: string, selection: ?number) => {
@@ -210,8 +266,8 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
     // handleAddToCart,
     handleSelectionChange,
     handleSetQuantity,
-    // isAddToCartDisabled:
-    //   !isSupportedProductType || isAddingItem || isMissingOptions,
+    isAddToCartDisabled:
+      !isSupportedProductType || isAddingItem || isMissingOptions,
     mediaGalleryEntries,
     productDetails,
     quantity,

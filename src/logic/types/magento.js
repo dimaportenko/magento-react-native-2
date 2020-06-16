@@ -112,5 +112,6 @@ export type ConfigurableProduct = {
 }
 
 export type Product = ConfigurableProduct | SimpleProduct;
+export type ProductType = $PropertyType<Product, '__typename'>;
 
 export type MediaPathType = 'image-product' | 'image-category';

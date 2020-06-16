@@ -8,7 +8,8 @@ import { Text, View, Card, Colors } from 'react-native-ui-lib';
 import FastImage from 'react-native-fast-image';
 import type { Category } from '../../logic/types/magento';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
-import { getCategoryColorByIndex } from '../../theme/colors';
+import { getCategoryColorByIndex, getColorPair } from '../../theme/colors';
+import { color } from 'react-native-reanimated';
 
 type Props = {
   index: number,
@@ -22,6 +23,7 @@ const IMAGE_WIDTH = 90;
 
 export const CategoryItem = (props: Props) => {
   const [backgroundColor, setBackgroundColor] = useState('#fff');
+  const [textColor, setTextColor] = useState('#000');
   const [imageWrapStyle, setImageWrapStyle] = useState({});
   const { category, right, onPress } = props;
   const { image } = useCategoryTileImage({ item: category });
@@ -41,7 +43,9 @@ export const CategoryItem = (props: Props) => {
   }, [right]);
 
   useEffect(() => {
-    setBackgroundColor(getCategoryColorByIndex(props.index));
+    const colors = getColorPair(props.index);
+    setBackgroundColor(colors.background);
+    setTextColor(colors.text);
   }, [props.index]);
 
   const renderImage = () => {
@@ -66,7 +70,7 @@ export const CategoryItem = (props: Props) => {
 
   const renderContent = () => (
     <View flex center>
-      <Text categoryItemTitle>{category.name}</Text>
+      <Text categoryItemTitle style={{ color: textColor }}>{category.name}</Text>
     </View>
   );
 

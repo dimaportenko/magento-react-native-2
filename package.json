@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@apollo/client": "3.0.0-beta.44",
+    "@apollo/client": "^3.0.0-rc.2",
     "@react-native-community/async-storage": "^1.10.3",
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/datetimepicker": "^2.3.2",
