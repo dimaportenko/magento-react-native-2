@@ -9,6 +9,7 @@ import { LoadingScreen } from '../screens/home/LoadingScreen';
 
 import type { Product, StoreConfig } from '../logic/types/magento';
 import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
+import { CartButton } from '../components/cart/CartButton';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,15 @@ export const RootStack = () => {
   const storeConfig: ?StoreConfig = useStoreConfig();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={({ navigation, route }) => {
+        return {
+          headerRight: () => (
+            <CartButton />
+          ),
+        };
+      }}
+    >
       {
         (storeConfig === null)
         ? (<Stack.Screen

@@ -43,9 +43,10 @@ export const CategoryItem = (props: Props) => {
   }, [right]);
 
   useEffect(() => {
-    const colors = getColorPair(props.index);
-    setBackgroundColor(colors.background);
-    setTextColor(colors.text);
+    // const colors = getColorPair(props.index);
+    // setBackgroundColor(colors.background);
+    // setTextColor(colors.text);
+    setBackgroundColor(getCategoryColorByIndex(props.index));
   }, [props.index]);
 
   const renderImage = () => {

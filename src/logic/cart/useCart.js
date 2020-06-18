@@ -5,7 +5,7 @@
 import React from 'react';
 import type { Product, ProductType } from '../types/magento';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartAddItemRequestStart } from '../../redux/actions/cart';
+import { cartAddItemRequestStart, cartId } from '../../redux/actions/cart';
 import { CREATE_CART } from '../../queries/mutations/createCart';
 import { GET_CART_DETAILS } from '../../queries/getCartDetails';
 import { useMutation } from '@apollo/client';
@@ -19,6 +19,7 @@ type Props = {|
 
 type Result = {|
   addItemToCart(payload: Payload): Promise<any>,
+  getCartDetails(): void,
 |};
 
 type Option = {|
@@ -76,8 +77,34 @@ export const useCart = (): Result => {
     }
   };
 
-  const getCartDetails = async (payload) => {
+  const createCart = async () => {
+    try {
+      // errors can come from graphql and are not thrown
+      const { data, errors } = await fetchCartId({
+        fetchPolicy: 'no-cache'
+      });
 
+      let receivePayload;
+
+      if (errors) {
+        receivePayload = new Error(errors);
+      } else {
+        receivePayload = data.cartId;
+        dispatch(cartId(data.cartId));
+        // write to storage in the background
+        // saveCartId(data.cartId);
+      }
+
+      console.warn('data, errors', data, errors)
+      // dispatch(actions.getCart.receive(receivePayload));
+    } catch (error) {
+      // dispatch(actions.getCart.receive(error));
+      console.warn('error', error)
+    }
+  }
+
+  const getCartDetails = async (payload) => {
+    debugger
     // return async function thunk(dispatch, getState) {
     const { cartId } = cart;
     // const { isSignedIn } = user;
@@ -85,11 +112,12 @@ export const useCart = (): Result => {
 
       // if there isn't a cart, create one then retry this operation
       if (!cartId) {
-        await dispatch(
-          createCart({
-            fetchCartId
-          })
-        );
+        await createCart();
+        // await dispatch(
+        //   createCart({
+        //     fetchCartId
+        //   })
+        // );
         // return thunk(...arguments);
       }
 
@@ -142,5 +170,6 @@ export const useCart = (): Result => {
 
   return {
     addItemToCart,
+    getCartDetails,
   };
 };

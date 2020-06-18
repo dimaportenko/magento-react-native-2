@@ -16,6 +16,9 @@ export default (state: CartReduxState = initialState, action: CartActions): Cart
     case 'CART_ADD_ITEM_REQUEST': {
       return { ...state, isAddingItem: true };
     }
+    case 'CART_ID_ACTION': {
+      return { ...state, cartId: action.payload };
+    }
     default:
       return state;
   }
