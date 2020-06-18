@@ -104,7 +104,6 @@ export const useCart = (): Result => {
   }
 
   const getCartDetails = async (payload) => {
-    debugger
     // return async function thunk(dispatch, getState) {
     const { cartId } = cart;
     // const { isSignedIn } = user;
