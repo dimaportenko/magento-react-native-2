@@ -7,10 +7,13 @@ import { useCart } from './useCart';
 
 type Props = {||};
 
-type Result = {||};
+type Result = {|
+  test: null
+|};
 
 export const useCartTrigger = (props: Props): Result => {
   const { getCartDetails } = useCart();
+  const result = {};
 
 
   useEffect(() => {
@@ -20,5 +23,7 @@ export const useCartTrigger = (props: Props): Result => {
   }, []);
 
 
-  return {};
+  return {
+    test: null,
+  };
 };

@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useCartTrigger } from '../../logic/cart/useCartTrigger';
 
 export const CartButton = () => {
-  const data = useCartTrigger();
+  const { test } = useCartTrigger();
 
   return (
     <View marginR-10>

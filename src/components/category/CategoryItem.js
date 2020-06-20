@@ -8,8 +8,7 @@ import { Text, View, Card, Colors } from 'react-native-ui-lib';
 import FastImage from 'react-native-fast-image';
 import type { Category } from '../../logic/types/magento';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
-import { getCategoryColorByIndex, getColorPair } from '../../theme/colors';
-import { color } from 'react-native-reanimated';
+import { getCategoryColorByIndex } from '../../theme/colors';
 
 type Props = {
   index: number,

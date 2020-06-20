@@ -5,7 +5,7 @@
 import React from 'react';
 import type { Product, ProductType } from '../types/magento';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartAddItemRequestStart, cartId } from '../../redux/actions/cart';
+import { cartAddItemRequestStart, cartDetails, cartId } from '../../redux/actions/cart';
 import { CREATE_CART } from '../../queries/mutations/createCart';
 import { GET_CART_DETAILS } from '../../queries/getCartDetails';
 import { useMutation } from '@apollo/client';
@@ -90,7 +90,8 @@ export const useCart = (): Result => {
         receivePayload = new Error(errors);
       } else {
         receivePayload = data.cartId;
-        dispatch(cartId(data.cartId));
+        dispatch(cartId(receivePayload));
+        return receivePayload;
         // write to storage in the background
         // saveCartId(data.cartId);
       }
@@ -101,38 +102,37 @@ export const useCart = (): Result => {
       // dispatch(actions.getCart.receive(error));
       console.warn('error', error)
     }
+
+    return null;
   }
 
   const getCartDetails = async (payload) => {
     // return async function thunk(dispatch, getState) {
-    const { cartId } = cart;
+    let { cartId } = cart;
     // const { isSignedIn } = user;
     const isSignedIn = false;
 
       // if there isn't a cart, create one then retry this operation
       if (!cartId) {
-        await createCart();
-        // await dispatch(
-        //   createCart({
-        //     fetchCartId
-        //   })
-        // );
-        // return thunk(...arguments);
+        cartId = await createCart();
+        if (!cartId) {
+          return;
+        }
       }
 
-    //   // Once we have the cart id indicate that we are starting to make
-    //   // async requests for the details.
+      // Once we have the cart id indicate that we are starting to make
+      // async requests for the details.
     //   dispatch(actions.getDetails.request(cartId));
-    //
-    //   try {
-    //     const { data } = await fetchCartDetails({
-    //       variables: { cartId },
-    //       fetchPolicy: 'no-cache'
-    //     });
-    //     const { cart: details } = data;
-    //
+
+      try {
+        const { data } = await fetchCartDetails({
+          variables: { cartId },
+          fetchPolicy: 'no-cache'
+        });
+        const { cart: details } = data;
+        dispatch(cartDetails(details));
     //     dispatch(actions.getDetails.receive({ details }));
-    //   } catch (error) {
+      } catch (error) {
     //     dispatch(actions.getDetails.receive(error));
     //
     //     const shouldResetCart = !error.networkError && isInvalidCart(error);
@@ -163,7 +163,7 @@ export const useCart = (): Result => {
     //       // Retry this operation
     //       return thunk(...arguments);
     //     }
-    //   }
+      }
     // };
   };
 

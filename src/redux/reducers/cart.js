@@ -9,6 +9,7 @@ import type { CartActions } from '../types/actions';
 const initialState: CartReduxState = {
   isAddingItem: false,
   cartId: null,
+  details: null,
 };
 
 export default (state: CartReduxState = initialState, action: CartActions): CartReduxState => {
@@ -18,6 +19,9 @@ export default (state: CartReduxState = initialState, action: CartActions): Cart
     }
     case 'CART_ID_ACTION': {
       return { ...state, cartId: action.payload };
+    }
+    case 'CART_DETAILS_ACTION': {
+      return { ...state, details: action.payload, cartId: action.payload.id };
     }
     default:
       return state;

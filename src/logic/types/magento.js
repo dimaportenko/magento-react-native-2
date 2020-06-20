@@ -115,3 +115,15 @@ export type Product = ConfigurableProduct | SimpleProduct;
 export type ProductType = $PropertyType<Product, '__typename'>;
 
 export type MediaPathType = 'image-product' | 'image-category';
+
+export type CartItem = {|
+  id: string,
+  quantity: number,
+  product: Product,
+|}
+
+export type Cart = {|
+  __typename: 'Cart',
+  id: string,
+  items: Array<CartItem>,
+|}
