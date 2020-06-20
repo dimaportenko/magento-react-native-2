@@ -1,5 +1,5 @@
 /** @flow */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as types from './types';
 import { CategoriesScreen } from '../screens/category/CategoriesScreen';
@@ -10,11 +10,18 @@ import { LoadingScreen } from '../screens/home/LoadingScreen';
 import type { Product, StoreConfig } from '../logic/types/magento';
 import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
 import { CartButton } from '../components/cart/CartButton';
+import { useCart } from '../logic/cart/useCart';
 
 const Stack = createStackNavigator();
 
 export const RootStack = () => {
   const storeConfig: ?StoreConfig = useStoreConfig();
+  const { getCartDetails } = useCart();
+
+  useEffect(() => {
+    getCartDetails();
+  }, []); // eslint-disable-line
+
 
   return (
     <Stack.Navigator

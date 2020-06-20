@@ -1,5 +1,16 @@
 /* @flow */
 import ColorScheme from 'color-scheme';
+import { Colors } from 'react-native-ui-lib';
+
+export const colors = {
+  pink: '#FF69B4',
+  gold: '#FFD700',
+  control: Colors.rgba(Colors.black, 0.6),
+  controlTint: Colors.white,
+  primary: 'black',
+  secondary: 'white',
+  tertiary: '',
+};
 
 const scheme = new ColorScheme();
 scheme.from_hue(130)

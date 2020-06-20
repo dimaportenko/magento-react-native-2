@@ -1,9 +1,10 @@
 /** @flow */
-import type { Cart } from '../../logic/types/magento';
-import type { CartAddItemRequest, CartIdAction, CartDetailsAction } from '../types/actions';
+import type { Cart, Product } from '../../logic/types/magento';
+import type { CartLoadingAction, CartIdAction, CartDetailsAction } from '../types/actions';
 
-export const cartAddItemRequestStart = (): CartAddItemRequest => ({
-  type: 'CART_ADD_ITEM_REQUEST',
+export const cartLoading = (payload: $PropertyType<CartLoadingAction, 'payload'>): CartLoadingAction => ({
+  type: 'CART_LOADING',
+  payload,
 });
 
 export const cartId = (id: string): CartIdAction => ({

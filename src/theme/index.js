@@ -1,16 +1,9 @@
 /** @flow */
 import { Typography, Colors, Spacings, BorderRadiuses } from 'react-native-ui-lib';
+import { colors } from './colors';
 
 export const themeInit = () => {
-  Colors.loadColors({
-    pink: '#FF69B4',
-    gold: '#FFD700',
-    control: Colors.rgba(Colors.black, 0.6),
-    controlTint: Colors.white,
-    primary: 'black',
-    secondary: 'white',
-    tertiary: '',
-  });
+  Colors.loadColors(colors);
 
   const defaultFont = {
     fontSize: 14,

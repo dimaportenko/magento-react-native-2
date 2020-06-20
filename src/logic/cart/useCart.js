@@ -2,10 +2,10 @@
  * @flow
  * Created by Dima Portenko on 16.06.2020
  */
-import React from 'react';
-import type { Product, ProductType } from '../types/magento';
+import React, { useState } from 'react';
+import type { Cart, Product, ProductType } from '../types/magento';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartAddItemRequestStart, cartDetails, cartId } from '../../redux/actions/cart';
+import { cartDetails, cartId, cartLoading } from '../../redux/actions/cart';
 import { CREATE_CART } from '../../queries/mutations/createCart';
 import { GET_CART_DETAILS } from '../../queries/getCartDetails';
 import { useMutation } from '@apollo/client';
@@ -19,7 +19,8 @@ type Props = {|
 
 type Result = {|
   addItemToCart(payload: Payload): Promise<any>,
-  getCartDetails(): void,
+  getCartDetails(): Promise<any>,
+  cart: ?Cart,
 |};
 
 type Option = {|
@@ -54,8 +55,6 @@ export const useCart = (): Result => {
       parentSku
     } = payload;
 
-    dispatch(cartAddItemRequestStart());
-
     const { cartId } = cart;
     // const { isSignedIn } = user;
     const isSignedIn = false;
@@ -78,6 +77,8 @@ export const useCart = (): Result => {
   };
 
   const createCart = async () => {
+    dispatch(cartLoading({ key: 'create', value: true }));
+
     try {
       // errors can come from graphql and are not thrown
       const { data, errors } = await fetchCartId({
@@ -102,11 +103,12 @@ export const useCart = (): Result => {
       // dispatch(actions.getCart.receive(error));
       console.warn('error', error)
     }
-
+    dispatch(cartLoading({ key: 'create', value: false }));
     return null;
   }
 
   const getCartDetails = async (payload) => {
+    dispatch(cartLoading({ key: 'details', value: true }));
     // return async function thunk(dispatch, getState) {
     let { cartId } = cart;
     // const { isSignedIn } = user;
@@ -165,10 +167,12 @@ export const useCart = (): Result => {
     //     }
       }
     // };
+    dispatch(cartLoading({ key: 'details', value: false }));
   };
 
   return {
     addItemToCart,
     getCartDetails,
+    cart: cart.details,
   };
 };

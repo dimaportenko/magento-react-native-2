@@ -1,13 +1,18 @@
 /** @flow */
 import type { Cart } from '../../logic/types/magento';
+import type { CartLoadingKeys } from './state';
 
 export type CartActions =
   | CartDetailsAction
   | CartIdAction
-  | CartAddItemRequest;
+  | CartLoadingAction;
 
-export type CartAddItemRequest = {
-  type: 'CART_ADD_ITEM_REQUEST'
+export type CartLoadingAction = {
+  type: 'CART_LOADING',
+  payload: {
+    key: CartLoadingKeys,
+    value: boolean,
+  }
 }
 
 export type CartIdAction = {
