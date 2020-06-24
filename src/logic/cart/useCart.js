@@ -48,6 +48,7 @@ export const useCart = (): Result => {
 
 
   const addItemToCart = async (payload: Payload) => {
+    dispatch(cartLoading({ key: 'addItem', value: true }));
     const {
       addItemMutation,
       item,
@@ -71,9 +72,12 @@ export const useCart = (): Result => {
       await addItemMutation({
         variables
       });
-    } catch(error) {
 
+      await getCartDetails();
+    } catch(error) {
+      // TODO: handle error case
     }
+    dispatch(cartLoading({ key: 'addItem', value: false }));
   };
 
   const createCart = async () => {
@@ -101,13 +105,14 @@ export const useCart = (): Result => {
       // dispatch(actions.getCart.receive(receivePayload));
     } catch (error) {
       // dispatch(actions.getCart.receive(error));
+      // TODO: handle error case
       console.warn('error', error)
     }
     dispatch(cartLoading({ key: 'create', value: false }));
     return null;
   }
 
-  const getCartDetails = async (payload) => {
+  const getCartDetails = async () => {
     dispatch(cartLoading({ key: 'details', value: true }));
     // return async function thunk(dispatch, getState) {
     let { cartId } = cart;

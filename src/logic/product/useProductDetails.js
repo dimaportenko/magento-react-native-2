@@ -23,6 +23,7 @@ export type ProductDetailsData = {
   handleSelectionChange: (optionId: string, selection: ?number) => void,
   quantity: number,
   handleSetQuantity: (value: number) => void,
+  handleAddToCart: () => Promise<void>,
 }
 
 export type ProductDetails = {
@@ -263,7 +264,7 @@ export const useProductDetails = (props: Props): ProductDetailsData => {
 
   return {
     // breadcrumbCategoryId,
-    // handleAddToCart,
+    handleAddToCart,
     handleSelectionChange,
     handleSetQuantity,
     isAddToCartDisabled:
