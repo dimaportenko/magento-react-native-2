@@ -12,6 +12,7 @@ import { useMutation } from '@apollo/client';
 import { useAwaitQuery } from '../../apollo/useAwaitQuery';
 import type { CartReduxState } from '../../redux/types/state';
 import type { StateRedux } from '../../redux/reducers';
+import { showMessage } from 'react-native-flash-message';
 
 type Props = {|
 
@@ -53,7 +54,7 @@ export const useCart = (): Result => {
       addItemMutation,
       item,
       quantity,
-      parentSku
+      parentSku,
     } = payload;
 
     const { cartId } = cart;
@@ -66,16 +67,26 @@ export const useCart = (): Result => {
         parentSku,
         product: item,
         quantity,
-        sku: item.sku
+        sku: item.sku,
       };
 
       await addItemMutation({
-        variables
+        variables,
+      });
+
+      showMessage({
+        message: 'Success',
+        description: `${item.name} is added to cart.` ,
+        type: 'success',
       });
 
       await getCartDetails();
-    } catch(error) {
-      // TODO: handle error case
+    } catch (error) {
+      showMessage({
+        message: 'Error',
+        description: error?.message,
+        type: 'danger',
+      });
     }
     dispatch(cartLoading({ key: 'addItem', value: false }));
   };
@@ -86,31 +97,40 @@ export const useCart = (): Result => {
     try {
       // errors can come from graphql and are not thrown
       const { data, errors } = await fetchCartId({
-        fetchPolicy: 'no-cache'
+        fetchPolicy: 'no-cache',
       });
 
       let receivePayload;
 
       if (errors) {
-        receivePayload = new Error(errors);
+        const error = new Error(errors);
+        showMessage({
+          message: 'Error',
+          description: error?.message,
+          type: 'danger',
+        });
       } else {
         receivePayload = data.cartId;
         dispatch(cartId(receivePayload));
+
         return receivePayload;
         // write to storage in the background
         // saveCartId(data.cartId);
       }
 
-      console.warn('data, errors', data, errors)
+      console.warn('data, errors', data, errors);
       // dispatch(actions.getCart.receive(receivePayload));
     } catch (error) {
       // dispatch(actions.getCart.receive(error));
-      // TODO: handle error case
-      console.warn('error', error)
+      showMessage({
+        message: 'Error',
+        description: error?.message,
+        type: 'danger',
+      });
     }
     dispatch(cartLoading({ key: 'create', value: false }));
     return null;
-  }
+  };
 
   const getCartDetails = async () => {
     dispatch(cartLoading({ key: 'details', value: true }));
@@ -134,7 +154,7 @@ export const useCart = (): Result => {
       try {
         const { data } = await fetchCartDetails({
           variables: { cartId },
-          fetchPolicy: 'no-cache'
+          fetchPolicy: 'no-cache',
         });
         const { cart: details } = data;
         dispatch(cartDetails(details));

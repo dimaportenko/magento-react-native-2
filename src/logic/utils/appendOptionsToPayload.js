@@ -1,6 +1,6 @@
 /** @flow */
 import { findMatchingVariant } from './findMatchingProductVariant';
-import type { ConfigurableProduct, Product, ProductType } from '../types/magento';
+import type { Product, ProductType } from '../types/magento';
 import { isProductConfigurable } from './isProductConfigurable';
 
 type Option = {|
@@ -16,17 +16,11 @@ type Payload = {|
   parentSku?: string,
 |}
 
-type Result = {
-  ...Payload,
-  options: Array<{ option_id: string, option_value: number }>
-}
-
 export const appendOptionsToPayload = (
   payload: Payload,
   optionSelections: Map<string, ?number>,
   _optionCodes: ?Map<string, string> = null
 ): Payload => {
-
   const { item } = payload;
   let optionCodes = _optionCodes;
 
@@ -63,6 +57,7 @@ export const appendOptionsToPayload = (
     parentSku: item.sku,
     item: Object.assign({}, selectedVariant.product),
   });
+  payload.item.name = item.name;
 
   return payload;
 };
