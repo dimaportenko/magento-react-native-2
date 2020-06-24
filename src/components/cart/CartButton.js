@@ -6,14 +6,15 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import { View, Badge } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useCart } from '../../logic/cart/useCart';
 import { colors } from '../../theme/colors';
 import { useSelector } from 'react-redux';
-import type { StateRedux } from '../../redux/reducers';
 import type { CartReduxState } from '../../redux/types/state';
+import { useNavigation } from '@react-navigation/core';
+import * as routes from '../../navigation/types';
 
 export const CartButton = () => {
   const { details, loading } = useSelector((state): CartReduxState => state.cart);
+  const navigation = useNavigation();
 
   if (loading.details) {
     return (
@@ -23,9 +24,13 @@ export const CartButton = () => {
     );
   }
 
+  const onPress = () => {
+    navigation.push(routes.CART_SCREEN);
+  }
+
   return (
     <View marginR-10>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Icon name="shopping-cart" size={20} />
         <View abs style={{ top: -5, right: -5 }}>
           <Badge

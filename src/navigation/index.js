@@ -11,6 +11,7 @@ import type { Product, StoreConfig } from '../logic/types/magento';
 import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
 import { CartButton } from '../components/cart/CartButton';
 import { useCart } from '../logic/cart/useCart';
+import { CartScreen } from '../screens/checkout/CartScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,8 @@ export const RootStack = () => {
           headerRight: () => (
             <CartButton />
           ),
+          headerBackTitleVisible: false,
+          title: route?.params?.title,
         };
       }}
     >
@@ -41,7 +44,6 @@ export const RootStack = () => {
             options={({ navigation, route }) => {
               return {
                 headerShown: false,
-                headerBackTitleVisible: false,
               };
             }}
           />)
@@ -49,31 +51,27 @@ export const RootStack = () => {
             <Stack.Screen
               name={types.CATEGORIES_SCREEN}
               component={CategoriesScreen}
-              options={({ navigation, route }) => {
-                return {
-                  title: route?.params?.title || 'Categories',
-                  headerBackTitleVisible: false,
-                };
-              }}
+              options={({ navigation, route }) => ({
+                title: route?.params?.title || 'Categories',
+              })}
             />
             <Stack.Screen
               name={types.CATEGORY_SCREEN}
               component={CategoryScreen}
-              options={({ navigation, route }) => {
-                return {
-                  title: route?.params?.title || 'Categories',
-                  headerBackTitleVisible: false,
-                };
-              }}
+            />
+            <Stack.Screen
+              name={types.CART_SCREEN}
+              component={CartScreen}
+              options={({ navigation, route }) => ({
+                title: route?.params?.title || 'Cart',
+                headerRight: null,
+              })}
             />
             <Stack.Screen
               name={types.PRODUCT_SCREEN}
               component={ProductScreen}
               options={({ navigation, route }) => {
-                // const product: Product = route.params.product;
                 return {
-                  // title: product.name || 'Product',
-                  // headerBackTitleVisible: false,
                   headerShown: false,
                 };
               }}
