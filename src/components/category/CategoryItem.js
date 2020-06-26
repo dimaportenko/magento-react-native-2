@@ -4,11 +4,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { Text, View, Card, Colors } from 'react-native-ui-lib';
+import { Text, View, Colors, TouchableOpacity } from 'react-native-ui-lib';
 import FastImage from 'react-native-fast-image';
 import type { Category } from '../../logic/types/magento';
 import { useCategoryTileImage } from '../../logic/category/useCategoryTile';
 import { getCategoryColorByIndex } from '../../theme/colors';
+import { Card } from '../common/Card';
 
 type Props = {
   index: number,
@@ -96,7 +97,7 @@ export const CategoryItem = (props: Props) => {
       row
       borderRadius={BORDER_RADIUS}
       height={80}
-      containerStyle={{ backgroundColor }}
+      style={{ backgroundColor }}
       onPress={() => { onPress(category); }}
       enableShadow
       useNative

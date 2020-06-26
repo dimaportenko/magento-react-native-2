@@ -4,12 +4,14 @@
  */
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
-import { Text, View, Card, Image, Spacings, Constants } from 'react-native-ui-lib';
+import { Text, View, Image, Spacings, Constants } from 'react-native-ui-lib';
 import _ from 'lodash';
 
 import type { Product } from '../../logic/types/magento';
 import { Price } from '../price/Price';
 import { clearHtmlText } from '../../logic/utils/clearHtmlText';
+import { Card } from '../common/Card';
+import { colors } from '../../theme/colors';
 
 const COLUMN_SIZE = (Constants.screenWidth - 3 * Spacings.s4) / 2;
 const BORDER_RADIUS = 10;
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: COLUMN_SIZE,
+    backgroundColor: colors.white,
   },
   image: {
     width: COLUMN_SIZE,
