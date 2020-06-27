@@ -1,38 +1,11 @@
 /** @noflow */
 import { gql } from '@apollo/client';
+import { ProductListingFragment } from './cartProductListingFragment';
 
 export const GET_CART_DETAILS = gql`
     query getCartDetails($cartId: String!) {
       cart(cart_id: $cartId) @connection(key: "Cart") {
-        id
-        items {
-            id
-            product {
-                id
-                name
-                sku
-                small_image {
-                    url
-                    label
-                }
-                price {
-                    regularPrice {
-                        amount {
-                            value
-                        }
-                    }
-                }
-            }
-            quantity
-            ... on ConfigurableCartItem {
-                configurable_options {
-                    id
-                    option_label
-                    value_id
-                    value_label
-                }
-            }
-        }
+        ...ProductListingFragment
         prices {
             grand_total {
                 value
@@ -41,5 +14,5 @@ export const GET_CART_DETAILS = gql`
         }
     }
   }
-
+  ${ProductListingFragment}
 `;

@@ -1,12 +1,15 @@
 /** @noflow */
 import { gql } from '@apollo/client';
+import { ProductListingFragment } from './cartProductListingFragment';
 
 
 export const CartFragment = gql`
     fragment CartPageFragment on Cart {
         id
         total_quantity
+        ...ProductListingFragment
     }
+    ${ProductListingFragment}
 `;
 
 

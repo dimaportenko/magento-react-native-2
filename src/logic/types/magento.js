@@ -120,6 +120,12 @@ export type CartItem = {|
   id: string,
   quantity: number,
   product: Product,
+  prices: {
+    price: {
+      currency: string,
+      value: string
+    }
+  }
 |}
 
 export type Cart = {|

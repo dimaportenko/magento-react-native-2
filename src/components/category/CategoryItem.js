@@ -96,10 +96,10 @@ export const CategoryItem = (props: Props) => {
       row
       borderRadius={BORDER_RADIUS}
       height={80}
-      containerStyle={{ backgroundColor }}
+      containerStyle={[{ backgroundColor }, styles.containerShadow]}
       onPress={() => { onPress(category); }}
       enableShadow
-      useNative
+      // useNative
       activeOpacity={1}
       activeScale={0.98}
     >
@@ -116,5 +116,12 @@ const styles = StyleSheet.create({
   image: {
     width: IMAGE_WIDTH,
     height: '100%',
+  },
+  containerShadow: {
+    // overflow: 'visible',
+    shadowColor: Colors.dark40,
+    shadowOpacity: 0.55,
+    shadowRadius: 5,
+    shadowOffset: { height: 3, width: 0 },
   },
 });
