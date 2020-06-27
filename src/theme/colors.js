@@ -3,8 +3,8 @@ import ColorScheme from 'color-scheme';
 import { Colors } from 'react-native-ui-lib';
 
 export const colors = {
-  pink: '#FF69B4',
-  gold: '#FFD700',
+  black: '#000000',
+  white: '#ffffff',
   control: Colors.rgba(Colors.black, 0.6),
   controlTint: Colors.white,
   primary: 'black',

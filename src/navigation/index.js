@@ -12,6 +12,9 @@ import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
 import { CartButton } from '../components/cart/CartButton';
 import { useCart } from '../logic/cart/useCart';
 import { CartScreen } from '../screens/checkout/CartScreen';
+import { Colors, Spacings, View } from 'react-native-ui-lib';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { colors } from '../theme/colors';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +33,11 @@ export const RootStack = () => {
         return {
           headerRight: () => (
             <CartButton />
+          ),
+          headerBackImage: () => (
+            <View paddingH-5>
+              <Icon name="left" color={colors.black} size={24}/>
+            </View>
           ),
           headerBackTitleVisible: false,
           title: route?.params?.title,
