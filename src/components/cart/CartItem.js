@@ -31,7 +31,7 @@ export const CartItem = ({ item }: ProductItemProps) => {
         source={{ uri: product.image }}
         resizeMode="contain"
       />
-      <View>
+      <View spread paddingV-5>
         <Text>{product.name}</Text>
         <ProductOptions options={product.options} />
         <Price currency={product.currency} value={product.unitPrice} />

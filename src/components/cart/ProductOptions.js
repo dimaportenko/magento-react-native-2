@@ -3,7 +3,7 @@
  * Created by Dima Portenko on 27.06.2020
  */
 import React, { useMemo, Fragment } from 'react';
-import { View, Text } from 'react-native-ui-lib';
+import { Text } from 'react-native-ui-lib';
 
 type ProductOptionsProps = {
   options: Array<{

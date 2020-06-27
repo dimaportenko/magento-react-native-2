@@ -132,4 +132,14 @@ export type Cart = {|
   __typename: 'Cart',
   id: string,
   items: Array<CartItem>,
+  prices: {
+      grand_total: {
+      value: string,
+      currency: string,
+    },
+    subtotal_excluding_tax: {
+      currency: string,
+      value: string,
+    }
+  }
 |}

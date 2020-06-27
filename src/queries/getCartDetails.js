@@ -11,6 +11,10 @@ export const GET_CART_DETAILS = gql`
                 value
                 currency
             }
+            subtotal_excluding_tax {
+                currency
+                value
+            }
         }
     }
   }
