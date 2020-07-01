@@ -9,9 +9,12 @@ import { useSelector } from 'react-redux';
 import type { CartReduxState } from '../../redux/types/state';
 import { CartItem } from '../../components/cart/CartItem';
 import { Price } from '../../components/price/Price';
+import * as routes from '../../navigation/types';
+import { useNavigation } from '@react-navigation/core';
 
 export const CartScreen = () => {
   const { details, loading } = useSelector((state): CartReduxState => state.cart);
+  const navigation = useNavigation();
 
   if (!details && loading.details) {
     return (
@@ -33,6 +36,10 @@ export const CartScreen = () => {
     <CartItem item={item} />
   );
 
+  const onCheckoutPress = () => {
+    navigation.push(routes.CHECKOUT_SCREEN);
+  };
+
   return (
     <View flex>
       <FlatList
@@ -49,7 +56,7 @@ export const CartScreen = () => {
           label="Checkout"
           backgroundColor={Colors.primary}
           fullWidth
-          // onPress={handleAddToCart}
+          onPress={onCheckoutPress}
         />
       </View>
     </View>

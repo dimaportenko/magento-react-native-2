@@ -15,6 +15,7 @@ import { CartScreen } from '../screens/checkout/CartScreen';
 import { Colors, Spacings, View } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { colors } from '../theme/colors';
+import { CheckoutScreen } from '../screens/checkout/CheckoutScreen';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,14 @@ export const RootStack = () => {
               component={CartScreen}
               options={({ navigation, route }) => ({
                 title: route?.params?.title || 'Cart',
+                headerRight: null,
+              })}
+            />
+            <Stack.Screen
+              name={types.CHECKOUT_SCREEN}
+              component={CheckoutScreen}
+              options={({ navigation, route }) => ({
+                title: route?.params?.title || 'Checkout',
                 headerRight: null,
               })}
             />
