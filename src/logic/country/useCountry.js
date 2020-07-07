@@ -10,12 +10,14 @@ type CountryDataType = {
 type ResultType = {
   loading: boolean,
   countries: Array<CountryDataType>,
+  countryCodes: Array<string>,
 }
 
 export const useCountry = (): ResultType => {
   const { data, error, loading } = useQuery(GET_COUNTRIES_QUERY);
 
   let formattedCountriesData = [{ label: 'Loading Countries...', value: '' }];
+  let countryCodes = [];
   if (!loading && !error) {
     const { countries } = data;
     formattedCountriesData = countries.map(country => ({
@@ -24,10 +26,12 @@ export const useCountry = (): ResultType => {
       value: country.two_letter_abbreviation,
     }));
     formattedCountriesData.sort((a, b) => (a.label < b.label ? -1 : 1));
+    countryCodes = formattedCountriesData.map(item => item.value);
   }
 
   return {
     countries: formattedCountriesData,
+    countryCodes,
     loading,
   };
 };
