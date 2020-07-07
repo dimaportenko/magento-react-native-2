@@ -12,7 +12,7 @@ import { useStoreConfig } from '../logic/storeConfig/useStoreConfig';
 import { CartButton } from '../components/cart/CartButton';
 import { useCart } from '../logic/cart/useCart';
 import { CartScreen } from '../screens/checkout/CartScreen';
-import { Colors, Spacings, View } from 'react-native-ui-lib';
+import { View } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { colors } from '../theme/colors';
 import { CheckoutScreen } from '../screens/checkout/CheckoutScreen';
@@ -31,6 +31,10 @@ export const RootStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => {
+        let title: string = route.params
+        && route.params.title
+        && (typeof route.params.title === 'string')
+          ? route.params.title : '';
         return {
           headerRight: () => (
             <CartButton />
@@ -41,7 +45,7 @@ export const RootStack = () => {
             </View>
           ),
           headerBackTitleVisible: false,
-          title: route?.params?.title,
+          title,
         };
       }}
     >
@@ -73,7 +77,7 @@ export const RootStack = () => {
               component={CartScreen}
               options={({ navigation, route }) => ({
                 title: route?.params?.title || 'Cart',
-                headerRight: null,
+                headerRight: () => null,
               })}
             />
             <Stack.Screen
@@ -81,7 +85,7 @@ export const RootStack = () => {
               component={CheckoutScreen}
               options={({ navigation, route }) => ({
                 title: route?.params?.title || 'Checkout',
-                headerRight: null,
+                headerRight: () => null,
               })}
             />
             <Stack.Screen

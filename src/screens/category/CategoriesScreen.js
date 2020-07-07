@@ -11,7 +11,7 @@ import type { Category } from '../../logic/types/magento';
 export const CategoriesScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const [categoryId] = useState(route?.params?.categoryId || magentoConfig.rootCategoryId);
+  const [categoryId] = useState(route?.params?.categoryId ?? magentoConfig.rootCategoryId);
 
   const onCategoryPress = (category: Category) => {
     const route: string = category.children_count > 0

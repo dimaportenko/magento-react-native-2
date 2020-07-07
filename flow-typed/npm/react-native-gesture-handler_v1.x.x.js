@@ -225,7 +225,7 @@ declare module 'react-native-gesture-handler/gestureHandlerRootHOC' {
       Component: React$ComponentType<Config>,
       containerStyles: ?ViewStyle
     ): React$ComponentType<Config>,
-    ...
+    ...,
   };
 }
 

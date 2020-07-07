@@ -31,14 +31,14 @@ export const GuestShippingForm = () => {
             placeholder="First Name"
             onChangeText={handleChange('firstname')}
             onBlur={handleBlur('firstname')}
-            value={values.email}
+            value={values.firstname}
           />
           <View paddingT-10 />
           <TextInput
             placeholder="Last Name"
             onChangeText={handleChange('lastname')}
             onBlur={handleBlur('lastname')}
-            value={values.email}
+            value={values.lastname}
           />
           <View paddingT-10 />
           <Button
