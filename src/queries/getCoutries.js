@@ -7,6 +7,11 @@ export const GET_COUNTRIES_QUERY = gql`
             id
             full_name_english
             two_letter_abbreviation
+            available_regions {
+                id
+                code
+                name
+            }
         }
     }
 `;

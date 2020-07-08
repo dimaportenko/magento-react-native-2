@@ -2,16 +2,30 @@
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES_QUERY } from '../../queries/getCoutries';
 
-type CountryDataType = {
+type CountryDataType = {|
   label: string,
   value: string,
-}
+|}
 
-type ResultType = {
+export type RegionDataType = {|
+  id: string,
+  code: string,
+  name: string,
+|}
+
+export type CountryQueryType = {|
+  id: string,
+  full_name_english: ?string,
+  two_letter_abbreviation: string,
+  available_regions: ?RegionDataType
+|}
+
+type ResultType = {|
   loading: boolean,
   countries: Array<CountryDataType>,
   countryCodes: Array<string>,
-}
+  countriesData: Array<CountryQueryType>,
+|}
 
 export const useCountry = (): ResultType => {
   const { data, error, loading } = useQuery(GET_COUNTRIES_QUERY);
@@ -30,6 +44,7 @@ export const useCountry = (): ResultType => {
   }
 
   return {
+    countriesData: data?.countries,
     countries: formattedCountriesData,
     countryCodes,
     loading,

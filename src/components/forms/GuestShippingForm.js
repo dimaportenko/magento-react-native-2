@@ -8,14 +8,24 @@ import { Formik } from 'formik';
 import { TextInput } from '../common/TextInput';
 import { useCountry } from '../../logic/country/useCountry';
 import CountryPicker from 'react-native-country-picker-modal';
+import type { RegionDataType } from '../../logic/country/useCountry';
+import { RegionInput } from './RegionInput';
 
 export const GuestShippingForm = () => {
-  const { loading, countries, countryCodes } = useCountry();
+  const { loading, countries, countryCodes, countriesData } = useCountry();
   const [countryPickerVisible, setCountryPickerVisible] = useState(false);
+  const [selectedCountryCode: ?string, setSelectedCountryCode] = useState(null);
+  const [regionData: ?RegionDataType, setRegionData] = useState(null);
 
-  // useEffect(() => {
-    // setCountryCodes(countries.map(item => item.value));
-  // }, [countries]);
+  useEffect(() => {
+    console.warn('countriesData', countriesData)
+    if (selectedCountryCode) {
+      const selectedData = countriesData.find(country => country.two_letter_abbreviation === selectedCountryCode);
+      if (selectedData) {
+        setRegionData(selectedData.available_regions);
+      }
+    }
+  }, [selectedCountryCode, countriesData]);
 
   return (
     <Formik
@@ -61,8 +71,11 @@ export const GuestShippingForm = () => {
             countryCodes={countryCodes}
             onClose={() => setCountryPickerVisible(false)}
             visible={countryPickerVisible}
-            // $FlowFixMeState
-            onSelect={(country) => handleChange('country')(country.cca2)}
+            onSelect={(country) => {
+              // $FlowFixMeState
+              handleChange('country')(country.cca2);
+              setSelectedCountryCode(country.cca2);
+            }}
             withFilter
           />
           <View paddingT-10 />
@@ -85,6 +98,13 @@ export const GuestShippingForm = () => {
             onChangeText={handleChange('city')}
             onBlur={handleBlur('city')}
             value={values.city}
+          />
+          <View paddingT-10 />
+          <RegionInput
+            regionData={regionData}
+            value={values.region}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
           />
           <View paddingT-10 />
           <TextInput
