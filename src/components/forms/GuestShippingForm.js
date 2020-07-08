@@ -24,6 +24,11 @@ export const GuestShippingForm = () => {
         firstname: '',
         lastname: '',
         country: '',
+        street: '',
+        street2: '',
+        city: '',
+        postcode: '',
+        telephone: '',
       }}
       onSubmit={values => console.log(values)}
     >
@@ -59,6 +64,41 @@ export const GuestShippingForm = () => {
             // $FlowFixMeState
             onSelect={(country) => handleChange('country')(country.cca2)}
             withFilter
+          />
+          <View paddingT-10 />
+          <TextInput
+            placeholder="Street Address"
+            onChangeText={handleChange('street')}
+            onBlur={handleBlur('street')}
+            value={values.street}
+          />
+          <View paddingT-10 />
+          <TextInput
+            placeholder="Street Address 2"
+            onChangeText={handleChange('street2')}
+            onBlur={handleBlur('street2')}
+            value={values.street2}
+          />
+          <View paddingT-10 />
+          <TextInput
+            placeholder="City"
+            onChangeText={handleChange('city')}
+            onBlur={handleBlur('city')}
+            value={values.city}
+          />
+          <View paddingT-10 />
+          <TextInput
+            placeholder="ZIP / Postal Code"
+            onChangeText={handleChange('postcode')}
+            onBlur={handleBlur('postcode')}
+            value={values.postcode}
+          />
+          <View paddingT-10 />
+          <TextInput
+            placeholder="Phone Number"
+            onChangeText={handleChange('telephone')}
+            onBlur={handleBlur('telephone')}
+            value={values.telephone}
           />
           <View paddingT-10 />
           <Button
