@@ -18,7 +18,6 @@ export const GuestShippingForm = () => {
   const [regionData: ?RegionDataType, setRegionData] = useState(null);
 
   useEffect(() => {
-    console.warn('countriesData', countriesData)
     if (selectedCountryCode) {
       const selectedData = countriesData.find(country => country.two_letter_abbreviation === selectedCountryCode);
       if (selectedData) {
