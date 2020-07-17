@@ -7,5 +7,3 @@ export const CART_SCREEN: string = 'CART_SCREEN';
 export const CHECKOUT_SCREEN: string = 'CHECKOUT_SCREEN';
 
 export const PRODUCT_SCREEN: string = 'PRODUCT_SCREEN';
-
-export const SELECTOR_SCREEN: string = 'SELECTOR_SCREEN';

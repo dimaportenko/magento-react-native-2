@@ -16,7 +16,6 @@ import { View } from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { colors } from '../theme/colors';
 import { CheckoutScreen } from '../screens/checkout/CheckoutScreen';
-import { SelectorScreen } from '../screens/selector/SelectorScreen';
 
 const Stack = createStackNavigator();
 
@@ -96,10 +95,6 @@ export const RootStack = () => {
                   headerShown: false,
                 };
               }}
-            />
-            <Stack.Screen
-              name={types.SELECTOR_SCREEN}
-              component={SelectorScreen}
             />
           </>)
       }

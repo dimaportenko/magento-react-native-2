@@ -10,6 +10,7 @@ import { useCountry } from '../../logic/country/useCountry';
 import CountryPicker from 'react-native-country-picker-modal';
 import type { RegionDataType } from '../../logic/country/useCountry';
 import { RegionInput } from './RegionInput';
+import { Select } from '../modals/Select';
 
 export const GuestShippingForm = () => {
   const { loading, countries, countryCodes, countriesData } = useCountry();
@@ -76,6 +77,10 @@ export const GuestShippingForm = () => {
               setSelectedCountryCode(country.cca2);
             }}
             withFilter
+          />
+          <View paddingT-10 />
+          <Select
+            title="Select Country"
           />
           <View paddingT-10 />
           <TextInput
