@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   input: {
     padding: 8,
   },
-})
+});

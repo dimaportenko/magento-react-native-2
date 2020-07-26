@@ -7,24 +7,23 @@ import { View, Button, Colors } from 'react-native-ui-lib';
 import { Formik } from 'formik';
 import { TextInput } from '../common/TextInput';
 import { useCountry } from '../../logic/country/useCountry';
-import CountryPicker from 'react-native-country-picker-modal';
-import type { RegionDataType } from '../../logic/country/useCountry';
+import type { CountryQueryType, RegionDataType } from '../../logic/country/useCountry';
 import { RegionInput } from './RegionInput';
 import { Select } from '../modals/Select';
 
 export const GuestShippingForm = () => {
   const { loading, countries, countryCodes, countriesData } = useCountry();
-  const [countryPickerVisible, setCountryPickerVisible] = useState(false);
   const [selectedCountryCode: ?string, setSelectedCountryCode] = useState(null);
-  const [regionData: ?RegionDataType, setRegionData] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState<?CountryQueryType>(null);
 
   useEffect(() => {
     if (selectedCountryCode) {
       const selectedData = countriesData.find(country => country.two_letter_abbreviation === selectedCountryCode);
       if (selectedData) {
-        setRegionData(selectedData.available_regions);
+        setSelectedCountry(selectedData);
       }
     }
+    // console.warn(countriesData)
   }, [selectedCountryCode, countriesData]);
 
   return (
@@ -65,22 +64,16 @@ export const GuestShippingForm = () => {
             value={values.lastname}
           />
           <View paddingT-10 />
-          <CountryPicker
-            withCountryNameButton
-            countryCode={values.country}
-            countryCodes={countryCodes}
-            onClose={() => setCountryPickerVisible(false)}
-            visible={countryPickerVisible}
-            onSelect={(country) => {
-              // $FlowFixMeState
-              handleChange('country')(country.cca2);
-              setSelectedCountryCode(country.cca2);
-            }}
-            withFilter
-          />
-          <View paddingT-10 />
           <Select
             title="Select Country"
+            data={countriesData}
+            labelKey="full_name_english"
+            selectedLabel={selectedCountry?.full_name_english}
+            onSelect={(country) => {
+              // $FlowFixMeState*/
+              handleChange('country')(country.id);
+              setSelectedCountryCode(country.id);
+            }}
           />
           <View paddingT-10 />
           <TextInput
@@ -105,7 +98,7 @@ export const GuestShippingForm = () => {
           />
           <View paddingT-10 />
           <RegionInput
-            regionData={regionData}
+            regionData={selectedCountry?.available_regions}
             value={values.region}
             handleChange={handleChange}
             handleBlur={handleBlur}
