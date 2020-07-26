@@ -9,22 +9,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { colors } from '../../theme/colors';
 
-type SelectProps<DataType> = {|
+type SelectProps<DataType, KeyType> = {|
   title: string,
-  data: Array<DataType>,
-  labelKey: string,
+  data: Array<{
+    ...DataType,
+    [KeyType]: string,
+  }>,
+  labelKey: KeyType,
   selectedLabel: ?string,
   onSelect(item: DataType): void,
 |}
 
-export const Select = <DataType>({ title, data, labelKey, onSelect, selectedLabel }: SelectProps<DataType>) => {
+export const Select = <DataType, KeyType>({ title, data, labelKey, onSelect, selectedLabel }: SelectProps<DataType, KeyType>) => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState('');
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState<Array<{...DataType, [KeyType]: string}>>([]);
 
   useEffect(() => {
     if (data?.length) {
-      const filteredData = data.filter(item => item?.[labelKey] && item?.[labelKey].includes(search));
+      const filteredData = data.filter(item => item?.[labelKey] && item[labelKey].includes(search));
       setFiltered(filteredData);
     }
   }, [data, search, labelKey]);
@@ -37,7 +40,7 @@ export const Select = <DataType>({ title, data, labelKey, onSelect, selectedLabe
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => onPress(item)}>
       <View padding-10 style={styles.item}>
-        <Text defaultF>{item?.[labelKey]}</Text>
+        <Text defaultF>{item[labelKey]}</Text>
       </View>
     </TouchableOpacity>
   );
