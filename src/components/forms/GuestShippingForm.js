@@ -38,6 +38,11 @@ export const GuestShippingForm = () => {
         city: '',
         postcode: '',
         telephone: '',
+        region: {
+          id: '',
+          name: '',
+          code: '',
+        },
       }}
       onSubmit={values => console.log(values)}
     >

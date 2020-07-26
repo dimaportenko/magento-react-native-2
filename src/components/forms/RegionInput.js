@@ -2,13 +2,14 @@
  * @flow
  * Created by Dima Portenko on 08.07.2020
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native-ui-lib';
 import type { RegionDataType } from '../../logic/country/useCountry';
 import { TextInput } from '../common/TextInput';
+import { Select } from '../modals/Select';
 
 type Props = {|
-  regionData: ?RegionDataType,
+  regionData: ?Array<RegionDataType>,
   handleChange(path: string): void,
   handleBlur(path: string): void,
   value: string,
@@ -16,11 +17,22 @@ type Props = {|
 
 export const RegionInput = (props: Props) => {
   const { regionData, handleBlur, handleChange, value } = props;
+  const [selectedRegion, setSelectedRegion] = useState<?RegionDataType>(null);
 
   if (regionData) {
     return (
       <View>
-        <Text>Region Picker</Text>
+        <Select
+          title="Select Region"
+          data={regionData}
+          labelKey="name"
+          selectedLabel={selectedRegion?.name}
+          onSelect={(region) => {
+            // $FlowFixMeState*/
+            // handleChange('region')(region);
+            setSelectedRegion(region);
+          }}
+        />
       </View>
     );
   }
@@ -28,8 +40,8 @@ export const RegionInput = (props: Props) => {
   return (
     <TextInput
       placeholder="State"
-      onChangeText={handleChange('postcode')}
-      onBlur={handleBlur('postcode')}
+      onChangeText={handleChange('region')}
+      onBlur={handleBlur('region')}
       value={value}
     />
   );

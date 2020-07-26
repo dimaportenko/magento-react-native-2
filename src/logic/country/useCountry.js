@@ -17,7 +17,7 @@ export type CountryQueryType = {|
   id: string,
   full_name_english: ?string,
   two_letter_abbreviation: string,
-  available_regions: ?RegionDataType
+  available_regions: ?Array<RegionDataType>
 |}
 
 type ResultType = {|

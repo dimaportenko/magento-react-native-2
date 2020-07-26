@@ -37,7 +37,7 @@ export const Select = <DataType, KeyType>({ title, data, labelKey, onSelect, sel
     setShow(false);
   };
 
-  const renderItem = (item, index) => (
+  const renderItem = (item) => (
     <TouchableOpacity onPress={() => onPress(item)}>
       <View padding-10 style={styles.item}>
         <Text defaultF>{item[labelKey]}</Text>
@@ -77,7 +77,7 @@ export const Select = <DataType, KeyType>({ title, data, labelKey, onSelect, sel
           <View paddingH-10>
             <FlatList
               data={filtered}
-              renderItem={({ item, index }) => renderItem(item, index)}
+              renderItem={({ item, index }) => renderItem(item)}
               keyExtractor={item => item[labelKey]}
             />
           </View>
