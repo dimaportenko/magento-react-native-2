@@ -12,7 +12,11 @@ type Props = {|
   regionData: ?Array<RegionDataType>,
   handleChange(path: string): void,
   handleBlur(path: string): void,
-  value: string,
+  value: {
+    id: string,
+    name: string,
+    code: string,
+  } | string,
 |}
 
 export const RegionInput = (props: Props) => {
@@ -29,7 +33,11 @@ export const RegionInput = (props: Props) => {
           selectedLabel={selectedRegion?.name}
           onSelect={(region) => {
             // $FlowFixMeState*/
-            // handleChange('region')(region);
+            handleChange('region')({
+              target: {
+                value: region,
+              },
+            });
             setSelectedRegion(region);
           }}
         />
@@ -42,7 +50,7 @@ export const RegionInput = (props: Props) => {
       placeholder="State"
       onChangeText={handleChange('region')}
       onBlur={handleBlur('region')}
-      value={value}
+      value={typeof value === 'string' ? value : value.name}
     />
   );
 };
