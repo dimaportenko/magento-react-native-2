@@ -3,7 +3,7 @@
  * Created by Dima Portenko on 08.07.2020
  */
 import React, { useState } from 'react';
-import { View, Text } from 'react-native-ui-lib';
+import { View } from 'react-native-ui-lib';
 import type { RegionDataType } from '../../logic/country/useCountry';
 import { TextInput } from '../common/TextInput';
 import { Select } from '../modals/Select';
