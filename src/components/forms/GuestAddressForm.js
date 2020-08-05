@@ -10,11 +10,18 @@ import { useCountry } from '../../logic/country/useCountry';
 import type { CountryQueryType, RegionDataType } from '../../logic/country/useCountry';
 import { RegionInput } from './RegionInput';
 import { Select } from '../modals/Select';
+import { useGuestAddressForm } from '../../logic/checkout/useGuestAddressForm';
 
-export const GuestShippingForm = () => {
+export const GuestAddressForm = () => {
   const { loading, countries, countryCodes, countriesData } = useCountry();
   const [selectedCountryCode: ?string, setSelectedCountryCode] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState<?CountryQueryType>(null);
+
+  const afterSubmit = () => {console.log('afterSubmit')}
+
+  const { handleSubmit: handleSubmitRequest } = useGuestAddressForm({
+    afterSubmit
+  });
 
   useEffect(() => {
     if (selectedCountryCode) {
@@ -25,6 +32,11 @@ export const GuestShippingForm = () => {
     }
     // console.warn(countriesData)
   }, [selectedCountryCode, countriesData]);
+
+  const onSubmit = (values) => {
+    console.log(values);
+    handleSubmitRequest(values);
+  }
 
   return (
     <Formik
@@ -44,7 +56,7 @@ export const GuestShippingForm = () => {
           code: '',
         },
       }}
-      onSubmit={values => console.log(values)}
+      onSubmit={onSubmit}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <View>
