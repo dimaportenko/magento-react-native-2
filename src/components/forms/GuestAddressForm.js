@@ -3,14 +3,34 @@
  * Created by Dima Portenko on 01.07.2020
  */
 import React, { useState, useEffect } from 'react';
-import { View, Button, Colors } from 'react-native-ui-lib';
+import { View, Button, Colors, Text } from 'react-native-ui-lib';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 import { TextInput } from '../common/TextInput';
 import { useCountry } from '../../logic/country/useCountry';
 import type { CountryQueryType, RegionDataType } from '../../logic/country/useCountry';
 import { RegionInput } from './RegionInput';
 import { Select } from '../modals/Select';
 import { useGuestAddressForm } from '../../logic/checkout/useGuestAddressForm';
+
+const validationSchema = yup.object({
+  email: yup.string().email('Invalid email').required(),
+  firstname: yup.string().required('Required'),
+  lastname: yup.string().required('Required'),
+  country: yup.string().required('Required'),
+  street: yup.string().required('Required'),
+  street2: '',
+  city: yup.string().required('Required'),
+  postcode: yup.string().required(),
+  telephone: yup.number().min(6, '6 digits minimum').required(),
+  region: yup.mixed().test('region-test', 'region is required', (value) => {
+    if (typeof value === 'string' || value instanceof String) {
+      return value.length > 0;
+    }
+    const { id, name, code } = value;
+    return id?.length > 0 && name?.length > 0 && code?.length > 0;
+  }),
+});
 
 export const GuestAddressForm = () => {
   const { loading, countries, countryCodes, countriesData } = useCountry();
@@ -40,6 +60,7 @@ export const GuestAddressForm = () => {
 
   return (
     <Formik
+      validationSchema={validationSchema}
       initialValues={{
         email: '',
         firstname: '',
@@ -58,13 +79,14 @@ export const GuestAddressForm = () => {
       }}
       onSubmit={onSubmit}
     >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
+      {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
         <View>
           <TextInput
             placeholder="Email"
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             value={values.email}
+            error={errors.email}
           />
           <View paddingT-10 />
           <TextInput
@@ -72,6 +94,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('firstname')}
             onBlur={handleBlur('firstname')}
             value={values.firstname}
+            error={errors.firstname}
           />
           <View paddingT-10 />
           <TextInput
@@ -79,6 +102,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('lastname')}
             onBlur={handleBlur('lastname')}
             value={values.lastname}
+            error={errors.lastname}
           />
           <View paddingT-10 />
           <Select
@@ -98,6 +122,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('street')}
             onBlur={handleBlur('street')}
             value={values.street}
+            error={errors.street}
           />
           <View paddingT-10 />
           <TextInput
@@ -112,6 +137,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('city')}
             onBlur={handleBlur('city')}
             value={values.city}
+            error={errors.city}
           />
           <View paddingT-10 />
           <RegionInput
@@ -126,6 +152,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('postcode')}
             onBlur={handleBlur('postcode')}
             value={values.postcode}
+            error={errors.postcode}
           />
           <View paddingT-10 />
           <TextInput
@@ -133,6 +160,7 @@ export const GuestAddressForm = () => {
             onChangeText={handleChange('telephone')}
             onBlur={handleBlur('telephone')}
             value={values.telephone}
+            error={errors.telephone}
           />
           <View paddingT-10 />
           <Button

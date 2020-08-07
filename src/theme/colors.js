@@ -10,6 +10,8 @@ export const colors = {
   primary: 'black',
   secondary: 'white',
   tertiary: '',
+  error: '#DC141C',
+  success: '',
 };
 
 const scheme = new ColorScheme();

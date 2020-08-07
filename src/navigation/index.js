@@ -47,6 +47,7 @@ export const RootStack = () => {
           title,
         };
       }}
+      // initialRouteName={types.CHECKOUT_SCREEN}
     >
       {
         (storeConfig === null)
