@@ -19,7 +19,7 @@ const validationSchema = yup.object({
   lastname: yup.string().required('Required'),
   country: yup.string().required('Required'),
   street: yup.string().required('Required'),
-  street2: '',
+  // street2: '',
   city: yup.string().required('Required'),
   postcode: yup.string().required(),
   telephone: yup.number().min(6, '6 digits minimum').required(),
@@ -67,7 +67,7 @@ export const GuestAddressForm = () => {
         lastname: '',
         country: '',
         street: '',
-        street2: '',
+        // street2: '',
         city: '',
         postcode: '',
         telephone: '',
@@ -124,13 +124,13 @@ export const GuestAddressForm = () => {
             value={values.street}
             error={errors.street}
           />
-          <View paddingT-10 />
-          <TextInput
-            placeholder="Street Address 2"
-            onChangeText={handleChange('street2')}
-            onBlur={handleBlur('street2')}
-            value={values.street2}
-          />
+          {/*<View paddingT-10 />*/}
+          {/*<TextInput*/}
+          {/*  placeholder="Street Address 2"*/}
+          {/*  onChangeText={handleChange('street2')}*/}
+          {/*  onBlur={handleBlur('street2')}*/}
+          {/*  value={values.street2}*/}
+          {/*/>*/}
           <View paddingT-10 />
           <TextInput
             placeholder="City"
